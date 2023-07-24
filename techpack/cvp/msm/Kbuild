@@ -1,3 +1,5 @@
+CVP_ROOT = $(srctree)/techpack/cvp
+
 LINUXINCLUDE    += -I$(CVP_ROOT)/include \
                    -I$(CVP_ROOT)/include/uapi \
 				   -I$(CVP_ROOT)/include/uapi/eva
@@ -31,4 +33,3 @@ msm-cvp-objs := eva/cvp.o \
         eva/msm_cvp_synx.o \
 		eva/cvp_fw_load.o
 obj-m += msm-cvp.o
-
