@@ -115,7 +115,7 @@
 
 	status = "ok";
 	qcom,i2c-touch-active = "focaltech,fts_ts";
-
+ 
 	focaltech@38 {
 		compatible = "focaltech,fts_ts";
 		reg = <0x38>;
@@ -128,6 +128,7 @@
 		focaltech,touch-type = "primary";
 
 		vdd-supply = <&L3C>;
+		vcc_i2c-supply = <&L8C>;
 
 		pinctrl-names = "pmx_ts_active", "pmx_ts_suspend","pmx_ts_release";
 		pinctrl-0 = <&ts_active>;

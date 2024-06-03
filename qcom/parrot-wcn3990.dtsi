@@ -35,7 +35,6 @@
 		qcom,iommu-faults = "stall-disable", "HUPCF", "non-fatal";
 		qcom,iommu-dma-addr-pool = <0xa0000000 0x10000000>;
 		qcom,iommu-geometry = <0xa0000000 0x10000000>;
-		qcom,fw-prefix;
 		qcom,wlan;
 		bdf-download-support;
 		wpss-support-enable;

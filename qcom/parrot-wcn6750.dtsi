@@ -99,7 +99,6 @@
 		qcom,iommu-dma-addr-pool = <0xa0000000 0x10000000>;
 		qcom,iommu-geometry = <0xa0000000 0x10010000>;
 		dma-coherent;
-		qcom,fw-prefix;
 		qcom,wlan;
 		tsens = "quiet-therm";
 		qcom,wlan-msa-fixed-region = <&wlan_fw_mem>;

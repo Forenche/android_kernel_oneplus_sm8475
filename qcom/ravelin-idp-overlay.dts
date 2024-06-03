@@ -2,7 +2,6 @@
 /plugin/;
 
 #include "ravelin-idp.dtsi"
-#include "ravelin-adrastea.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. Ravelin IDP";

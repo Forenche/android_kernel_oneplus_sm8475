@@ -61,7 +61,7 @@
 				config {
 					pins = "gpio14";
 					drive-strength = <2>;
-					bias-pull-down;
+					bias-disable;
 				};
 			};
 
@@ -1200,19 +1200,6 @@
 			};
 		};
 
-		trigout_a: trigout_a {
-			mux {
-				pins = "gpio26";
-				function = "qdss_cti";
-			};
-
-			config {
-				pins = "gpio26";
-				drive-strength = <2>;
-				bias-disable;
-			};
-		};
-
 		/* touchscreen pins */
 		pmx_ts_active {
 			ts_active: ts_active {
@@ -1402,7 +1389,7 @@
 			pcie0_clkreq_default: pcie0_clkreq_default {
 				mux {
 					pins = "gpio107";
-					function = "pcie0_clk_req";
+					function = "pcie0_clkreq";
 				};
 
 				config {
@@ -1435,21 +1422,6 @@
 					pins = "gpio107";
 					drive-strength = <2>;
 					bias-pull-up;
-				};
-			};
-		};
-
-		usb_phy_ps: usb_phy_ps {
-			usb3phy_portselect_default: usb3phy_portselect_default {
-				mux {
-					pins = "gpio94";
-					function = "usb0_phy_ps";
-				};
-
-				config {
-					pins = "gpio94";
-					bias-disable;
-					drive-strength = <2>;
 				};
 			};
 		};

@@ -26,22 +26,13 @@
 	chosen: chosen {
 		stdout-path = "/soc/qcom,qup_uart@994000:115200n8";
 
-		bootargs = "console=ttyMSM0,115200n8 loglevel=6 log_buf_len=256K kernel.panic_on_rcu_stall=1 loop.max_part=7 pcie_ports=compat msm_rtb.filter=0x237 allow_mismatched_32bit_el0 kasan=off rcupdate.rcu_expedited=1 rcu_nocbs=0-7 ftrace_dump_on_oops pstore.compress=none kpti=0 swiotlb=noforce cgroup.memory=nokmem,nosocket cpufreq.default_governor=performance page_poison=on kswapd_per_node=2 fsa4480_i2c.async_probe=1 can.stats_timer=0 allow_file_spec_access disable_dma32=on";
+		bootargs = "console=ttyMSM0,115200n8 loglevel=6 log_buf_len=256K kernel.panic_on_rcu_stall=1 loop.max_part=7 pcie_ports=compat msm_rtb.filter=0x237 allow_mismatched_32bit_el0 kasan=off rcupdate.rcu_expedited=1 rcu_nocbs=0-7 ftrace_dump_on_oops pstore.compress=none kpti=0 swiotlb=noforce cgroup.memory=nokmem,nosocket cpufreq.default_governor=performance page_poison=on fsa4480_i2c.async_probe=1 can.stats_timer=0 allow_file_spec_access disable_dma32=on";
 	};
 
 	memory { device_type = "memory"; reg = <0 0 0 0>; };
 	ddr-regions { };
 
 	reserved_memory: reserved-memory { };
-
-	mem-offline {
-		compatible = "qcom,mem-offline";
-		offline-sizes = <0x1 0x40000000 0x0 0x40000000>,
-				<0x1 0xc0000000 0x0 0x80000000>,
-				<0x2 0xc0000000 0x1 0x40000000>;
-		granule = <512>;
-		mboxes = <&qmp_aop 0>;
-	};
 
 	aliases: aliases {
 		serial0 = &qupv3_se5_2uart;
@@ -1680,7 +1671,6 @@
 		qcom,hyplog-enabled;
 		hyplog-address-offset = <0x410>;
 		hyplog-size-offset = <0x414>;
-		tmecrashdump-address-offset = <0x808a0000>;
 	};
 
 	qcom_qseecom: qseecom@c1700000 {
@@ -2066,10 +2056,10 @@
 
 			qcom,adsp_qrtr {
 				qcom,glink-channels = "IPCRTR";
+				qcom,non-wake-svc = <0x190>;
 				qcom,intents = <0x800  5
 						0x2000 3
 						0x4400 2>;
-				qcom,non-wake-svc = <0x190>;
 			};
 
 			qcom,msm_fastrpc_rpmsg {
@@ -2336,7 +2326,6 @@
 		qcom,iommu-dma-addr-pool = <0xa0000000 0x10000000>;
 		qcom,iommu-geometry = <0xa0000000 0x10010000>;
 		dma-coherent;
-		qcom,fw-prefix;
 		qcom,wlan;
 		tsens = "quiet-therm";
 		qcom,wlan-msa-fixed-region = <&wlan_fw_mem>;
@@ -2541,7 +2530,7 @@
 		interrupt-names = "hc_irq", "pwr_irq";
 
 		bus-width = <4>;
-		no-sdio;
+		//no-sdio;
 		no-mmc;
 		qcom,restore-after-cx-collapse;
 
@@ -2585,6 +2574,8 @@
 		phy-names = "ufsphy";
 		#reset-cells = <1>;
 
+                qcom,prime-mask = <0x70>;
+	        qcom,silver-mask = <0x0f>;
 		lanes-per-direction = <2>;
 		dev-ref-clk-freq = <0>; /* 19.2 MHz */
 		clock-names =

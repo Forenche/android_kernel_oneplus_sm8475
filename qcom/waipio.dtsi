@@ -20,7 +20,7 @@
 	#size-cells = <2>;
 
 	chosen: chosen {
-		bootargs = "console=ttyMSM0,115200n8 loglevel=6 kpti=0 log_buf_len=256K kernel.panic_on_rcu_stall=1 swiotlb=noforce loop.max_part=7 cgroup.memory=nokmem,nosocket pcie_ports=compat service_locator.enable=1 msm_rtb.filter=0x237 allow_mismatched_32bit_el0 cpufreq.default_governor=performance pelt=8 kasan=off rcupdate.rcu_expedited=1 rcu_nocbs=0-7 irqaffinity=0-3 ftrace_dump_on_oops pstore.compress=none fsa4480_i2c.async_probe=1 can.stats_timer=0 slub_debug=- allow_file_spec_access";
+		bootargs = "console=ttyMSM0,115200n8 loglevel=6 kpti=0 log_buf_len=2M kernel.panic_on_rcu_stall=1 swiotlb=noforce loop.max_part=7 cgroup.memory=nokmem,nosocket pcie_ports=compat service_locator.enable=1 msm_rtb.filter=0x237 allow_mismatched_32bit_el0 cpufreq.default_governor=performance pelt=8 kasan=off rcupdate.rcu_expedited=1 rcu_nocbs=0-7 irqaffinity=0-3 ftrace_dump_on_oops pstore.compress=none fsa4480_i2c.async_probe=1 can.stats_timer=0 slub_debug=- allow_file_spec_access";
 		stdout-path = "/soc/qcom,qup_uart@99c000:115200n8";
 	};
 
@@ -486,14 +486,9 @@
 
 	/* Linux kernel image is loaded at 0xa0000000 */
 
-	oem_vm_mem: oem_vm_region@bb000000 {
-		no-map;
-		reg = <0x0 0xbb000000 0x0 0x5000000>;
-	};
-
 	qheebsp_reserved_mem: qheebsp_reserved_region@e0000000 {
 		no-map;
-		reg = <0x0 0xe0000000 0x0 0x600000>;
+		reg = <0x0 0xe0000000 0x0 0>;
 	};
 
 	cpusys_vm_mem: cpusys_vm_region@e0600000 {
@@ -595,7 +590,7 @@
 		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
 		reusable;
 		alignment = <0x0 0x400000>;
-		size = <0x0 0x1000000>;
+		size = <0x0 0x2000000>;
 	};
 
 	cnss_wlan_mem: cnss_wlan_region {
@@ -715,6 +710,7 @@
 			domain-idle-states = <&CLUSTER_PWR_DN &APSS_OFF>;
 		};
 	};
+
 
 	slimbam: bamdma@3304000 {
 		compatible = "qcom,bam-v1.7.0";
@@ -1215,7 +1211,7 @@
 				qcom,intents = <0x800  5
 						0x2000 3
 						0x4400 2>;
-
+				/* Qcom case-06236027 add for qrtr wakeup-source */
 				qcom,no-wake-svc = <0x190>;
 			};
 
@@ -2018,7 +2014,6 @@
 		qcom,hyplog-enabled;
 		hyplog-address-offset = <0x410>;
 		hyplog-size-offset = <0x414>;
-		tmecrashdump-address-offset = <0x808a0000>;
 	};
 
 	qcom_qseecom: qseecom@c1700000 {
@@ -2141,7 +2136,7 @@
 		phy-names = "ufsphy";
 		#reset-cells = <1>;
 
-	        qcom,prime-mask = <0x70>;
+                qcom,prime-mask = <0x70>;
 	        qcom,silver-mask = <0x0f>;
 		lanes-per-direction = <2>;
 		dev-ref-clk-freq = <0>; /* 19.2 MHz */
