@@ -301,12 +301,12 @@ int nvt_output_data(int *buffer, struct chip_data_nt36672c *ts_data,
 
 	for (i = 0; i < data_volumn; i += 1) {
 		snprintf(data_buf, 64, "%d,", buffer[i]);
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 
 		if (!((i + 1) % num_each_line)) {
 			snprintf(data_buf, 64, "\n");
-			tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+			tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 				      strlen(data_buf), nvt_testdata->pos);
 		}
 	}
@@ -3636,7 +3636,7 @@ static int nvt_lpwg_rawdata_test(struct seq_file *s, void *chip_data,
 
 	if (chip_info->p_nvt_autotest_offset->lpwg_rawdata_n) {
 		snprintf(data_buf, 64, "%s\n", "[NVT LPWG RAW DATA]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(raw_data, chip_info, nvt_testdata, NODE_MATCH);
 
@@ -3791,11 +3791,11 @@ static int nvt_lpwg_diff_rawdata_test(struct seq_file *s, void *chip_data,
 	if (chip_info->p_nvt_autotest_offset->lpwg_diff_rawdata_p
 			&& chip_info->p_nvt_autotest_offset->lpwg_diff_rawdata_n) {
 		snprintf(data_buf, 64, "%s\n", "[NVT LPWG DIFF RAW DATA POSITIVE]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(noise_p_data, chip_info, nvt_testdata, NODE_MATCH);
 		snprintf(data_buf, 64, "%s\n", "[NVT LPWG DIFF RAW DATA NEGATIVE]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(noise_n_data, chip_info, nvt_testdata, NODE_MATCH);
 
@@ -4018,11 +4018,11 @@ static int nvt_fdm_diff_rawdata_test(struct seq_file *s, void *chip_data,
 	if (chip_info->p_nvt_autotest_offset->fdm_diff_rawdata_p
 			&& chip_info->p_nvt_autotest_offset->fdm_diff_rawdata_n) {
 		snprintf(data_buf, 64, "%s\n", "[NVT FDM DIFF RAW DATA POSITIVE]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(fdm_noise_p_data, chip_info, nvt_testdata, CHANNEL_MATCH);
 		snprintf(data_buf, 64, "%s\n", "[NVT FDM DIFF RAW DATA NEGATIVE]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(fdm_noise_n_data, chip_info, nvt_testdata, CHANNEL_MATCH);
 
@@ -4210,7 +4210,7 @@ static int nvt_fdm_rawdata_test(struct seq_file *s, void *chip_data,
 	if (chip_info->p_nvt_autotest_offset->fdm_rawdata_n
 			&& chip_info->p_nvt_autotest_offset->fdm_rawdata_p) {
 		snprintf(data_buf, 64, "%s\n", "[NVT FDM RAW DATA]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(fdm_raw_data, chip_info, nvt_testdata, CHANNEL_MATCH);
 
@@ -4422,7 +4422,7 @@ static int nvt_black_screen_test_preoperation(struct seq_file *s,
 	memset(data_buf, 0, sizeof(data_buf));
 	snprintf(data_buf, 128, "FW Version Name:%s\n total test item = %d\n",
 			 ts->panel_data.manufacture_info.version, item_cnt);
-	tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+	tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 		      strlen(data_buf), nvt_testdata->pos);
 
 	TPD_INFO("%s: total test item = %d \n", __func__, item_cnt);
@@ -5045,7 +5045,7 @@ static int nvt_fw_rawdata_test(struct seq_file *s, void *chip_data,
 	/*---FW Rawdata Test---*/
 	memset(data_buf, 0, sizeof(data_buf));
 	snprintf(data_buf, 64, "%s\n", "[NVT RAW DATA]");
-	tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+	tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 		      strlen(data_buf), nvt_testdata->pos);
 
 	if (chip_info->p_nvt_autotest_offset->fw_rawdata_p
@@ -5143,7 +5143,7 @@ static int nvt_cc_rawdata_test(struct seq_file *s, void *chip_data,
 		}
 
 		snprintf(data_buf, 64, "%s\n", "[NVT CC RAW DATA]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(cc_data, chip_info, nvt_testdata, NODE_MATCH);
 
@@ -5285,11 +5285,11 @@ static int nvt_fw_noise_test(struct seq_file *s, void *chip_data,
 		}
 
 		snprintf(data_buf, 64, "%s\n", "[NVT NOISE DATA POSITIVE]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(noise_p_data, chip_info, nvt_testdata, NODE_MATCH);
 		snprintf(data_buf, 64, "%s\n", "[NVT NOISE DATA NEGATIVE]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(noise_n_data, chip_info, nvt_testdata, NODE_MATCH);
 
@@ -5494,11 +5494,11 @@ static int nvt_doze_noise_test(struct seq_file *s, void *chip_data,
 		}
 
 		snprintf(data_buf, 64, "%s\n", "[NVT DOZE NOISE DATA POSITIVE]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(doze_noise_p_data, chip_info, nvt_testdata, CHANNEL_MATCH);
 		snprintf(data_buf, 64, "%s\n", "[NVT DOZE NOISE DATA NEGATIVE]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(doze_noise_n_data, chip_info, nvt_testdata, CHANNEL_MATCH);
 
@@ -5685,7 +5685,7 @@ static int nvt_doze_fw_rawdata_test(struct seq_file *s, void *chip_data,
 		}
 
 		snprintf(data_buf, 64, "%s\n", "[NVT DOZE FW RAW DATA]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(doze_raw_data, chip_info, nvt_testdata, CHANNEL_MATCH);
 
@@ -5808,7 +5808,7 @@ static int nvt_short_test(struct seq_file *s, void *chip_data,
 		}
 
 		snprintf(data_buf, 64, "%s\n", "[NVT SHORT]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(short_data, chip_info, nvt_testdata, NODE_MATCH);
 
@@ -5931,7 +5931,7 @@ static int nvt_open_test(struct seq_file *s, void *chip_data,
 		}
 
 		snprintf(data_buf, 64, "%s\n", "[NVT OPEN TEST]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(open_data, chip_info, nvt_testdata, NODE_MATCH);
 
@@ -6052,11 +6052,11 @@ static int nvt_digital_noise_test(struct seq_file *s, void *chip_data,
 		nvt_enter_digital_test(chip_info, false);
 
 		snprintf(data_buf, 64, "%s\n", "[NVT DIGITAL NOISE DATA POSITIVE]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(digital_noise_p_data, chip_info, nvt_testdata, NODE_MATCH);
 		snprintf(data_buf, 64, "%s\n", "[NVT DIGITAL NOISE DATA NEGATIVE]");
-		tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+		tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 			      strlen(data_buf), nvt_testdata->pos);
 		nvt_output_data(digital_noise_n_data, chip_info, nvt_testdata, NODE_MATCH);
 
@@ -6273,7 +6273,7 @@ static int nvt_autotest_preoperation(struct seq_file *s, void *chip_data,
 	memset(data_buf, 0, sizeof(data_buf));
 	snprintf(data_buf, 128, "FW Version Name:%s\nTotal test item = %d\n",
 			 ts->panel_data.manufacture_info.version, item_cnt);
-	tp_test_write(nvt_testdata->fp, nvt_testdata->length, data_buf,
+	tp_test_write_v2(nvt_testdata->fp, nvt_testdata->length, data_buf,
 		      strlen(data_buf), nvt_testdata->pos);
 
 	TPD_INFO("%s: total test item = %d \n", __func__, item_cnt);

@@ -69,7 +69,7 @@ enum {
 	TYPE_MAX                                    = 0xFF,
 };
 
-/*test item, used for (get_test_item_info) authenticate responding test item*/
+/*test item, used for (get_test_item_info_v2) authenticate responding test item*/
 enum {
 	TYPE_TEST_ERROR              = 0x00,
 	TYPE_TEST1                   = 0x01,

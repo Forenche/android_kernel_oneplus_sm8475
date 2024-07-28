@@ -4921,7 +4921,7 @@ static int gtx8_deltacapacitance(struct seq_file *s, void *chip_data,
 								p_test_item_info->top_limit_offset);
 
 			} else {
-				TPD_INFO("item: %d get_test_item_info fail\n", LIMIT_TYPE_TX_RX_DATA);
+				TPD_INFO("item: %d get_test_item_info_v2 fail\n", LIMIT_TYPE_TX_RX_DATA);
 			}
 		}
 	}
@@ -5012,7 +5012,7 @@ static int gtx8_capacitance_test(struct seq_file *s, void *chip_data,
 								       p_test_item_info->floor_limit_offset);
 
 			} else {
-				TPD_INFO("item: %d get_test_item_info fail\n", LIMIT_TYPE_TX_RX_DATA);
+				TPD_INFO("item: %d get_test_item_info_v2 fail\n", LIMIT_TYPE_TX_RX_DATA);
 			}
 		}
 	}
@@ -5097,7 +5097,7 @@ static int gtx8_self_rawcapacitance(struct seq_file *s, void *chip_data,
 							       p_test_item_info->floor_limit_offset);
 
 			} else {
-				TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST4);
+				TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST4);
 			}
 
 		} else {
@@ -5923,19 +5923,19 @@ static void gtx8_put_test_result(struct seq_file *s, void *chip_data,
 	if (ts_test->rawdata.size && ts_test->is_item_support[TYPE_TEST2]) {
 		if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 			snprintf(data_buf, 64, "%s\n", "[RAW DATA]");
-			tp_test_write(p_testdata->fp, p_testdata->length,
+			tp_test_write_v2(p_testdata->fp, p_testdata->length,
 				      data_buf, strlen(data_buf), p_testdata->pos);
 		}
 
 		for (i = 0; i < ts_test->rawdata.size; i++) {
 			if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 				snprintf(data_buf, 64, "%d,", ts_test->rawdata.data[i]);
-				tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+				tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 					      p_testdata->pos);
 
 				if (!((i + 1) % p_testdata->rx_num) && (i != 0)) {
 					snprintf(data_buf, 64, "\n");
-					tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+					tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 						      p_testdata->pos);
 				}
 			}
@@ -5945,19 +5945,19 @@ static void gtx8_put_test_result(struct seq_file *s, void *chip_data,
 	if (ts_test->noisedata.size && ts_test->is_item_support[TYPE_TEST1]) {
 		if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 			snprintf(data_buf, 64, "\n%s\n", "[NOISE DATA]");
-			tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+			tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 				      p_testdata->pos);
 		}
 
 		for (i = 0; i < ts_test->noisedata.size; i++) {
 			if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 				sprintf(data_buf, "%d,", ts_test->noisedata.data[i]);
-				tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+				tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 					      p_testdata->pos);
 
 				if (!((i + 1) % p_testdata->rx_num) && (i != 0)) {
 					snprintf(data_buf, 64, "\n");
-					tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+					tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 						      p_testdata->pos);
 				}
 			}
@@ -5967,21 +5967,21 @@ static void gtx8_put_test_result(struct seq_file *s, void *chip_data,
 	if (ts_test->self_noisedata.size && ts_test->is_item_support[TYPE_TEST1]) {
 		if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 			snprintf(data_buf, 64, "\n%s\n", "[SELF NOISE DATA]");
-			tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+			tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 				      p_testdata->pos);
 		}
 
 		for (i = 0; i < ts_test->self_noisedata.size; i++) {
 			if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 				sprintf(data_buf, "%d,", ts_test->self_noisedata.data[i]);
-				tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+				tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 					      p_testdata->pos);
 			}
 		}
 
 		if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 			sprintf(data_buf, "\n");
-			tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+			tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 				      p_testdata->pos);
 		}
 	}
@@ -5989,35 +5989,35 @@ static void gtx8_put_test_result(struct seq_file *s, void *chip_data,
 	if (ts_test->self_rawdata.size && ts_test->is_item_support[TYPE_TEST4]) {
 		if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 			snprintf(data_buf, 64, "\n%s\n", "[SELF RAW DATA]");
-			tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+			tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 				      p_testdata->pos);
 		}
 
 		for (i = 0; i < ts_test->self_rawdata.size; i++) {
 			if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 				sprintf(data_buf, "%d,", ts_test->self_rawdata.data[i]);
-				tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+				tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 					      p_testdata->pos);
 			}
 		}
 
 		if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 			sprintf(data_buf, "\n");
-			tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+			tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 				      p_testdata->pos);
 		}
 	}
 
 	if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 		snprintf(data_buf, 64, "TX:%d,RX:%d\n", p_testdata->tx_num, p_testdata->rx_num);
-		tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+		tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 			      p_testdata->pos);
 	}
 
 	if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 		snprintf(data_buf, 64, "Img version:%lld,device version:%lld\n",
 			 p_testdata->tp_fw, p_testdata->dev_tp_fw);
-		tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+		tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 			      p_testdata->pos);
 	}
 
@@ -6030,14 +6030,14 @@ static void gtx8_put_test_result(struct seq_file *s, void *chip_data,
 			if (GTP_TEST_PASS == ts_test->test_result[i]) {
 				if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 					snprintf(data_buf, 64, "\n%s %d:%s\n", test_item_name[i], i, "pass");
-					tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+					tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 						      p_testdata->pos);
 				}
 
 			} else if (GTP_PANEL_REASON == ts_test->test_result[i]) {
 				if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 					snprintf(data_buf, 64, "\n%s %d:%s\n", test_item_name[i], i, "NG:PANEL REASON");
-					tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+					tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 						      p_testdata->pos);
 					seq_printf(s, "%s", data_buf);
 				}
@@ -6046,7 +6046,7 @@ static void gtx8_put_test_result(struct seq_file *s, void *chip_data,
 				if (!IS_ERR_OR_NULL(p_testdata->fp)) {
 					snprintf(data_buf, 64, "\n%s %d:%s\n", test_item_name[i], i,
 						 "NG:SOFTWARE_REASON");
-					tp_test_write(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
+					tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, strlen(data_buf),
 						      p_testdata->pos);
 					seq_printf(s, "%s", data_buf);
 				}

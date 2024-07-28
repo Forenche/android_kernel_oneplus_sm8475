@@ -1395,7 +1395,7 @@ static int synaptics_nocbc_capacity_test(struct seq_file *s, void *chip_data,
 
 	if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
 		sprintf(chip_info->data_buf, "%s\n", "[RT20 Close CBC]");
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      chip_info->data_buf, strlen(chip_info->data_buf), syna_testdata->pos);
 	}
 
@@ -1456,7 +1456,7 @@ static int synaptics_nocbc_capacity_test(struct seq_file *s, void *chip_data,
 
 			if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
 				sprintf(chip_info->data_buf, "%d, ", baseline_data);
-				tp_test_write(syna_testdata->fp, syna_testdata->length,
+				tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 					      chip_info->data_buf, strlen(chip_info->data_buf), syna_testdata->pos);
 			}
 
@@ -1501,7 +1501,7 @@ static int synaptics_nocbc_capacity_test(struct seq_file *s, void *chip_data,
 		}
 
 		if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
-			tp_test_write(syna_testdata->fp, syna_testdata->length,
+			tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 				      "\n", 1, syna_testdata->pos);
 		}
 
@@ -1509,7 +1509,7 @@ static int synaptics_nocbc_capacity_test(struct seq_file *s, void *chip_data,
 	}
 
 	if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      "\n", 1, syna_testdata->pos);
 	}
 
@@ -1566,7 +1566,7 @@ static int synaptics_withcbc_capacity_test(struct seq_file *s, void *chip_data,
 	}
 
 	if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      "\n", 1, syna_testdata->pos);
 	}
 
@@ -1575,7 +1575,7 @@ static int synaptics_withcbc_capacity_test(struct seq_file *s, void *chip_data,
 
 	if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
 		sprintf(chip_info->data_buf, "%s\n", "[RT3 Open CBC]");
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      chip_info->data_buf, strlen(chip_info->data_buf),
 			      syna_testdata->pos);
 	}
@@ -1641,7 +1641,7 @@ static int synaptics_withcbc_capacity_test(struct seq_file *s, void *chip_data,
 
 			if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
 				sprintf(chip_info->data_buf, "%d, ", baseline_data);
-				tp_test_write(syna_testdata->fp, syna_testdata->length,
+				tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 					      chip_info->data_buf, strlen(chip_info->data_buf),
 					      syna_testdata->pos);
 			}
@@ -1686,7 +1686,7 @@ static int synaptics_withcbc_capacity_test(struct seq_file *s, void *chip_data,
 			count++;
 		}
 
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      "\n", 1, syna_testdata->pos);
 		TPD_DEBUG_NTAG("\n");
 	}
@@ -1698,7 +1698,7 @@ static int synaptics_withcbc_capacity_test(struct seq_file *s, void *chip_data,
 	return error_count;
 }
 
-static int synaptics_auto_test_rt25(struct seq_file *s, void *chip_data,
+static int synaptics_auto_test_v2_rt25(struct seq_file *s, void *chip_data,
 				    struct auto_testdata *syna_testdata,
 				    struct test_item_info *p_test_item_info)
 {
@@ -1809,7 +1809,7 @@ ERROR:
 	return error_count;
 }
 
-static int synaptics_auto_test_rt26(struct seq_file *s, void *chip_data,
+static int synaptics_auto_test_v2_rt26(struct seq_file *s, void *chip_data,
 				    struct auto_testdata *syna_testdata,
 				    struct test_item_info *p_test_item_info)
 {
@@ -1907,7 +1907,7 @@ ERROR:
 	return error_count;
 }
 
-static int synaptics_auto_test_rt100(struct seq_file *s, void *chip_data,
+static int synaptics_auto_test_v2_rt100(struct seq_file *s, void *chip_data,
 				     struct auto_testdata *syna_testdata,
 				     struct test_item_info *p_test_item_info)
 {
@@ -2201,7 +2201,7 @@ END:
 	return error_count;
 }
 
-static int synaptics_auto_test_rt133(struct seq_file *s, void *chip_data,
+static int synaptics_auto_test_v2_rt133(struct seq_file *s, void *chip_data,
 				     struct auto_testdata *syna_testdata,
 				     struct test_item_info *p_test_item_info)
 {
@@ -2248,7 +2248,7 @@ static int synaptics_auto_test_rt133(struct seq_file *s, void *chip_data,
 	return error_count;
 }
 
-static int synaptics_auto_test_rt150(struct seq_file *s, void *chip_data,
+static int synaptics_auto_test_v2_rt150(struct seq_file *s, void *chip_data,
 				     struct auto_testdata *syna_testdata,
 				     struct test_item_info *p_test_item_info)
 {
@@ -2266,7 +2266,7 @@ static int synaptics_auto_test_rt150(struct seq_file *s, void *chip_data,
 
 	if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
 		sprintf(chip_info->data_buf, "%s\n", "[RT150]");
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      chip_info->data_buf, strlen(chip_info->data_buf),
 			      syna_testdata->pos);
 	}
@@ -2293,7 +2293,7 @@ static int synaptics_auto_test_rt150(struct seq_file *s, void *chip_data,
 
 		if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
 			sprintf(chip_info->data_buf, "%d, ", unsigned_baseline_data);
-			tp_test_write(syna_testdata->fp, syna_testdata->length,
+			tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 				      chip_info->data_buf, strlen(chip_info->data_buf),
 				      syna_testdata->pos);
 		}
@@ -2310,14 +2310,14 @@ static int synaptics_auto_test_rt150(struct seq_file *s, void *chip_data,
 	}
 
 	if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      "\n", 1, syna_testdata->pos);
 	}
 
 	return error_count;
 }
 
-static int synaptics_auto_test_rt154(struct seq_file *s, void *chip_data,
+static int synaptics_auto_test_v2_rt154(struct seq_file *s, void *chip_data,
 				     struct auto_testdata *syna_testdata,
 				     struct test_item_info *p_test_item_info)
 {
@@ -2336,7 +2336,7 @@ static int synaptics_auto_test_rt154(struct seq_file *s, void *chip_data,
 
 	if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
 		sprintf(chip_info->data_buf, "%s\n", "[RT154]");
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      chip_info->data_buf, strlen(chip_info->data_buf),
 			      syna_testdata->pos);
 	}
@@ -2361,7 +2361,7 @@ static int synaptics_auto_test_rt154(struct seq_file *s, void *chip_data,
 
 		if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
 			sprintf(chip_info->data_buf, "%d, ", unsigned_baseline_data);
-			tp_test_write(syna_testdata->fp, syna_testdata->length,
+			tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 				      chip_info->data_buf, strlen(chip_info->data_buf),
 				      syna_testdata->pos);
 		}
@@ -2387,14 +2387,14 @@ static int synaptics_auto_test_rt154(struct seq_file *s, void *chip_data,
 	}
 
 	if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      "\n", 1, syna_testdata->pos);
 	}
 
 	return error_count;
 }
 
-static int synaptics_auto_test_rt155(struct seq_file *s, void *chip_data,
+static int synaptics_auto_test_v2_rt155(struct seq_file *s, void *chip_data,
 				     struct auto_testdata *syna_testdata,
 				     struct test_item_info *p_test_item_info)
 {
@@ -2413,7 +2413,7 @@ static int synaptics_auto_test_rt155(struct seq_file *s, void *chip_data,
 
 	if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
 		sprintf(chip_info->data_buf, "%s\n", "[RT155]");
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      chip_info->data_buf, strlen(chip_info->data_buf),
 			      syna_testdata->pos);
 	}
@@ -2446,7 +2446,7 @@ static int synaptics_auto_test_rt155(struct seq_file *s, void *chip_data,
 
 		if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
 			sprintf(chip_info->data_buf, "%d, ", baseline_data);
-			tp_test_write(syna_testdata->fp, syna_testdata->length,
+			tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 				      chip_info->data_buf, strlen(chip_info->data_buf),
 				      syna_testdata->pos);
 		}
@@ -2463,7 +2463,7 @@ static int synaptics_auto_test_rt155(struct seq_file *s, void *chip_data,
 	}
 
 	if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      "\n", 1, syna_testdata->pos);
 	}
 
@@ -2473,7 +2473,7 @@ static int synaptics_auto_test_rt155(struct seq_file *s, void *chip_data,
 	return error_count;
 }
 
-static int synaptics_auto_test_rt59(struct seq_file *s, void *chip_data,
+static int synaptics_auto_test_v2_rt59(struct seq_file *s, void *chip_data,
 				    struct auto_testdata *syna_testdata,
 				    struct test_item_info *p_test_item_info)
 {
@@ -2494,7 +2494,7 @@ static int synaptics_auto_test_rt59(struct seq_file *s, void *chip_data,
 
 	if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
 		sprintf(chip_info->data_buf, "%s\n", "[RT59]");
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      chip_info->data_buf, strlen(chip_info->data_buf),
 			      syna_testdata->pos);
 	}
@@ -2530,7 +2530,7 @@ static int synaptics_auto_test_rt59(struct seq_file *s, void *chip_data,
 	for (i = 0; i < syna_testdata->rx_num; i++) {
 		if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
 			sprintf(chip_info->data_buf, "%d, ", max_store[i]);
-			tp_test_write(syna_testdata->fp, syna_testdata->length,
+			tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 				      chip_info->data_buf, strlen(chip_info->data_buf),
 				      syna_testdata->pos);
 		}
@@ -2549,14 +2549,14 @@ static int synaptics_auto_test_rt59(struct seq_file *s, void *chip_data,
 	}
 
 	if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      "\n", 1, syna_testdata->pos);
 	}
 
 	return error_count;
 }
 
-static int synaptics_auto_test_rt63(struct seq_file *s, void *chip_data,
+static int synaptics_auto_test_v2_rt63(struct seq_file *s, void *chip_data,
 				    struct auto_testdata *syna_testdata,
 				    struct test_item_info *p_test_item_info)
 {
@@ -2573,7 +2573,7 @@ static int synaptics_auto_test_rt63(struct seq_file *s, void *chip_data,
 
 	if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
 		sprintf(chip_info->data_buf, "%s\n", "[RT63]");
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      chip_info->data_buf, strlen(chip_info->data_buf),
 			      syna_testdata->pos);
 	}
@@ -2607,7 +2607,7 @@ static int synaptics_auto_test_rt63(struct seq_file *s, void *chip_data,
 
 		if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
 			sprintf(chip_info->data_buf, "%d, ", node_data);
-			tp_test_write(syna_testdata->fp,  syna_testdata->length,
+			tp_test_write_v2(syna_testdata->fp,  syna_testdata->length,
 				      chip_info->data_buf, strlen(chip_info->data_buf),
 				      syna_testdata->pos);
 		}
@@ -2624,7 +2624,7 @@ static int synaptics_auto_test_rt63(struct seq_file *s, void *chip_data,
 	}
 
 	if (!IS_ERR_OR_NULL(syna_testdata->fp)) {
-		tp_test_write(syna_testdata->fp, syna_testdata->length,
+		tp_test_write_v2(syna_testdata->fp, syna_testdata->length,
 			      "\n", 1, syna_testdata->pos);
 	}
 
@@ -2647,7 +2647,7 @@ static int synaptics_test_enable_interrupt(void *chip_data, bool enable)
 	return ret;
 }
 
-static int synaptics_auto_test_preoperation(struct seq_file *s, void *chip_data,
+static int synaptics_auto_test_v2_preoperation(struct seq_file *s, void *chip_data,
 		struct auto_testdata *syna_testdata,
 		struct test_item_info *p_test_item_info)
 {
@@ -2676,7 +2676,7 @@ static int synaptics_auto_test_preoperation(struct seq_file *s, void *chip_data,
 	return 0;
 }
 
-static int synaptics_auto_test_endoperation(struct seq_file *s, void *chip_data,
+static int synaptics_auto_test_v2_endoperation(struct seq_file *s, void *chip_data,
 		struct auto_testdata *syna_testdata,
 		struct test_item_info *p_test_item_info)
 {
@@ -2698,22 +2698,22 @@ static int synaptics_auto_test_endoperation(struct seq_file *s, void *chip_data,
 static struct syna_auto_test_operations synaptics_test_ops = {
 	.test1       =  synaptics_nocbc_capacity_test,
 	.test2       =  synaptics_withcbc_capacity_test,
-	.test3       =  synaptics_auto_test_rt25,
-	.test4       =  synaptics_auto_test_rt26,
-	.test5       =  synaptics_auto_test_rt100,
-	.test6       =  synaptics_auto_test_rt133,
-	.test7       =  synaptics_auto_test_rt150,
-	.test8       =  synaptics_auto_test_rt154,
-	.test9       =  synaptics_auto_test_rt155,
-	.test10     =  synaptics_auto_test_rt59,
-	.test11     =  synaptics_auto_test_rt63,
+	.test3       =  synaptics_auto_test_v2_rt25,
+	.test4       =  synaptics_auto_test_v2_rt26,
+	.test5       =  synaptics_auto_test_v2_rt100,
+	.test6       =  synaptics_auto_test_v2_rt133,
+	.test7       =  synaptics_auto_test_v2_rt150,
+	.test8       =  synaptics_auto_test_v2_rt154,
+	.test9       =  synaptics_auto_test_v2_rt155,
+	.test10     =  synaptics_auto_test_v2_rt59,
+	.test11     =  synaptics_auto_test_v2_rt63,
 	.syna_auto_test_enable_irq    =  synaptics_test_enable_interrupt,
-	.syna_auto_test_preoperation  =  synaptics_auto_test_preoperation,
-	.syna_auto_test_endoperation  =  synaptics_auto_test_endoperation,
+	.syna_auto_test_preoperation  =  synaptics_auto_test_v2_preoperation,
+	.syna_auto_test_endoperation  =  synaptics_auto_test_v2_endoperation,
 };
 
 static struct engineer_test_operations syna_engineer_test_ops = {
-	.auto_test                  = synaptics_auto_test,
+	.auto_test                  = synaptics_auto_test_v2,
 };
 
 /*************************************auto test Funtion**************************************/

@@ -245,10 +245,10 @@ static int  ilitek_get_item_para(struct auto_testdata *testdata,
 		return -1;
 	}
 
-	p_test_item_info = get_test_item_info(testdata->fw, item_index);
+	p_test_item_info = get_test_item_info_v2(testdata->fw, item_index);
 
 	if (!p_test_item_info) {
-		TPD_INFO("item: %d get_test_item_info fail\n", item_index);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", item_index);
 		return -1;
 
 	} else {
@@ -349,10 +349,10 @@ static int  ilitek_get_para_openshort(struct auto_testdata *testdata,
 		return -1;
 	}
 
-	p_test_item_info = get_test_item_info(testdata->fw, item_index);
+	p_test_item_info = get_test_item_info_v2(testdata->fw, item_index);
 
 	if (!p_test_item_info) {
-		TPD_INFO("item: %d get_test_item_info fail\n", item_index);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", item_index);
 		return -1;
 
 	} else {
@@ -2022,10 +2022,10 @@ static int mp_get_timing_info(void *chip_data, struct auto_testdata *testdata)
 	struct test_item_info *p_test_item_info = NULL;
 	struct ilitek_ts_data *chip_info = (struct ilitek_ts_data *)chip_data;
 	struct core_mp_test_data *core_mp = &chip_info->core_mp;
-	p_test_item_info = get_test_item_info(testdata->fw, TYPE_TIMEING_INFO);
+	p_test_item_info = get_test_item_info_v2(testdata->fw, TYPE_TIMEING_INFO);
 
 	if (!p_test_item_info) {
-		ILI_ERR("item: %d get_test_item_info fail\n", TYPE_TIMEING_INFO);
+		ILI_ERR("item: %d get_test_item_info_v2 fail\n", TYPE_TIMEING_INFO);
 		return -1;
 
 	} else {
@@ -2576,11 +2576,11 @@ static int mp_show_result(void *chip_data, struct auto_testdata *testdata,
 
 	if (lcm_on && testdata->fp) {
 		ILI_INFO("testdata->length = 0x%x\n", (u32)testdata->length);
-		tp_test_write(testdata->fp, testdata->length, csv, csv_len, testdata->pos);
+		tp_test_write_v2(testdata->fp, testdata->length, csv, csv_len, testdata->pos);
 
 	} else if ((!lcm_on) && testdata->bs_fp) {
 		ILI_INFO("testdata->bs_length = 0x%x\n", (u32)testdata->bs_length);
-		tp_test_write(testdata->bs_fp, testdata->bs_length, csv, csv_len,
+		tp_test_write_v2(testdata->bs_fp, testdata->bs_length, csv, csv_len,
 			      testdata->bs_pos);
 	}
 

@@ -547,11 +547,11 @@ struct module {
 	/* What modules do I depend on? */
 	struct list_head target_list;
 
-	/* Destruction function. */
-	void (*exit)(void);
-
 	atomic_t refcnt;
 #endif
+
+	/* Destruction function. */
+	void (*exit)(void);
 
 #ifdef CONFIG_CONSTRUCTORS
 	/* Constructor functions. */

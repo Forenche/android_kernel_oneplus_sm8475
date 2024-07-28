@@ -4104,7 +4104,7 @@ static void store_to_file(void *fp, size_t max_count,
 	va_end(args);
 
 	if (!IS_ERR_OR_NULL(fp))
-		tp_test_write(fp, max_count, buf, strlen(buf), pos);
+		tp_test_write_v2(fp, max_count, buf, strlen(buf), pos);
 }
 
 static int testing_run_prod_test_item(struct syna_tcm_data *tcm_info,
@@ -5023,12 +5023,12 @@ static struct syna_auto_test_operations syna_tcm_test_ops = {
 	.test10      =  syna_hybrid_absnoise_test,
 	.test11       =  syna_hybrid_rawcap_test_ad,
 	/*.syna_auto_test_enable_irq    =  synaptics_test_enable_interrupt,*/
-	/*.syna_auto_test_preoperation  =  synaptics_auto_test_preoperation,*/
-	/*.syna_auto_test_endoperation  =  synaptics_auto_test_endoperation,*/
+	/*.syna_auto_test_preoperation  =  synaptics_auto_test_v2_preoperation,*/
+	/*.syna_auto_test_endoperation  =  synaptics_auto_test_v2_endoperation,*/
 };
 
 static struct engineer_test_operations syna_tcm_engineer_test_ops = {
-	.auto_test                  = synaptics_auto_test,
+	.auto_test                  = synaptics_auto_test_v2,
 };
 
 static int syna_tcm_collect_reports(struct syna_tcm_data *tcm_info,

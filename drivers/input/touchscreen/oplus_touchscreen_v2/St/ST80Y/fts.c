@@ -6116,12 +6116,12 @@ static int st80y_production_test_ito(struct seq_file *s, void *chip_data,
 							  p_test_item_info->floor_limit_offset);
 
 			} else {
-				TPD_INFO("item: %d get_test_item_info fail\n", LIMIT_TYPE_TX_RX_DATA);
+				TPD_INFO("item: %d get_test_item_info_v2 fail\n", LIMIT_TYPE_TX_RX_DATA);
 				return -1;
 			}
 		}
 	} else {
-		TPD_INFO("item: %d get_test_item_info fail\n", LIMIT_TYPE_TX_RX_DATA);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", LIMIT_TYPE_TX_RX_DATA);
 		return -1;
 	}
 
@@ -6218,12 +6218,12 @@ static int st80y_production_test_ito_adj(struct seq_file *s, void *chip_data,
 							  p_test_item_info->floor_limit_offset);
 
 			} else {
-				TPD_INFO("item: %d get_test_item_info fail\n", LIMIT_TYPE_TX_RX_DATA);
+				TPD_INFO("item: %d get_test_item_info_v2 fail\n", LIMIT_TYPE_TX_RX_DATA);
 				return -1;
 			}
 		}
 	} else {
-		TPD_INFO("item: %d get_test_item_info fail\n", LIMIT_TYPE_TX_RX_DATA);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", LIMIT_TYPE_TX_RX_DATA);
 		return -1;
 	}
 
@@ -6384,13 +6384,13 @@ static int st80y_production_test_ms_raw(struct seq_file *s, void *chip_data,
 
 			} else {
 				chip_info->st80ytestdata.test_ok ++;
-				TPD_INFO("item: %d get_test_item_info fail\n", LIMIT_TYPE_TX_RX_DATA);
+				TPD_INFO("item: %d get_test_item_info_v2 fail\n", LIMIT_TYPE_TX_RX_DATA);
 				return -1;
 			}
 		}
 	} else {
 		chip_info->st80ytestdata.test_ok ++;
-		TPD_INFO("item: %d get_test_item_info fail\n", LIMIT_TYPE_TX_RX_DATA);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", LIMIT_TYPE_TX_RX_DATA);
 		return -1;
 	}
 
@@ -6536,13 +6536,13 @@ static int st80y_production_test_ms_cx_lp(struct seq_file *s, void *chip_data,
 
 			} else {
 				chip_info->st80ytestdata.test_ok ++;
-				TPD_INFO("item: %d get_test_item_info fail\n", LIMIT_TYPE_TX_RX_DATA);
+				TPD_INFO("item: %d get_test_item_info_v2 fail\n", LIMIT_TYPE_TX_RX_DATA);
 				return -1;
 			}
 		}
 	} else {
 		chip_info->st80ytestdata.test_ok ++;
-		TPD_INFO("item: %d get_test_item_info fail\n", LIMIT_TYPE_TX_RX_DATA);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", LIMIT_TYPE_TX_RX_DATA);
 		return -1;
 	}
 
@@ -6690,13 +6690,13 @@ static int st80y_production_test_ms_cx_lp_adj(struct seq_file *s, void *chip_dat
 								p_test_item_info->floor_limit_offset);
 			} else {
 				chip_info->st80ytestdata.test_ok ++;
-				TPD_INFO("item: %d get_test_item_info fail\n", LIMIT_TYPE_TX_RX_DATA);
+				TPD_INFO("item: %d get_test_item_info_v2 fail\n", LIMIT_TYPE_TX_RX_DATA);
 				return -1;
 			}
 		}
 	} else {
 		chip_info->st80ytestdata.test_ok ++;
-		TPD_INFO("item: %d get_test_item_info fail\n", LIMIT_TYPE_TX_RX_DATA);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", LIMIT_TYPE_TX_RX_DATA);
 		return -1;
 	}
 
@@ -6842,7 +6842,7 @@ static int st80y_production_test_ss_raw(struct seq_file *s, void *chip_data,
 								 p_test_item_info->floor_limit_offset) + st_testdata->tx_num;
 			} else {
 				chip_info->st80ytestdata.test_ok ++;
-				TPD_INFO("item: %d get_test_item_info fail\n", LIMIT_TYPE_SLEF_TX_RX_DATA);
+				TPD_INFO("item: %d get_test_item_info_v2 fail\n", LIMIT_TYPE_SLEF_TX_RX_DATA);
 				return ret | ERROR_PROD_TEST_DATA;
 			}
 		} else {
@@ -6877,14 +6877,14 @@ static int st80y_production_test_ss_raw(struct seq_file *s, void *chip_data,
 	if (ssRawFrame.force_data) {
 		if (!IS_ERR_OR_NULL(st_testdata->fp)) {
 			snprintf(data_buf, 64, "\n%s\n", "[SS RAW FORCE]");
-			tp_test_write(st_testdata->fp, st_testdata->length,
+			tp_test_write_v2(st_testdata->fp, st_testdata->length,
 				      data_buf, strlen(data_buf), st_testdata->pos);
 		}
 
 		for (i = 0; i < ssRawFrame.header.force_node; i++) {
 			if (!IS_ERR_OR_NULL(st_testdata->fp)) {
 				snprintf(data_buf, 64, "%d,", ssRawFrame.force_data[i]);
-				tp_test_write(st_testdata->fp, st_testdata->length, data_buf, strlen(data_buf),
+				tp_test_write_v2(st_testdata->fp, st_testdata->length, data_buf, strlen(data_buf),
 					      st_testdata->pos);
 			}
 		}
@@ -6892,14 +6892,14 @@ static int st80y_production_test_ss_raw(struct seq_file *s, void *chip_data,
 	if (ssRawFrame.sense_data) {
 		if (!IS_ERR_OR_NULL(st_testdata->fp)) {
 			snprintf(data_buf, 64, "\n%s\n", "[SS RAW SENSE]");
-			tp_test_write(st_testdata->fp, st_testdata->length,
+			tp_test_write_v2(st_testdata->fp, st_testdata->length,
 				      data_buf, strlen(data_buf), st_testdata->pos);
 		}
 
 		for (i = 0; i < ssRawFrame.header.sense_node; i++) {
 			if (!IS_ERR_OR_NULL(st_testdata->fp)) {
 				snprintf(data_buf, 64, "%d,", ssRawFrame.sense_data[i]);
-				tp_test_write(st_testdata->fp, st_testdata->length, data_buf, strlen(data_buf),
+				tp_test_write_v2(st_testdata->fp, st_testdata->length, data_buf, strlen(data_buf),
 					      st_testdata->pos);
 			}
 		}
@@ -7008,7 +7008,7 @@ static int st80y_production_test_ss_ix_cx(struct seq_file *s, void *chip_data,
 								  p_test_item_info->floor_limit_offset) + st_testdata->tx_num;
 			} else {
 				chip_info->st80ytestdata.test_ok ++;
-				TPD_INFO("item: %d get_test_item_info fail\n", LIMIT_TYPE_SLEF_TX_RX_DATA);
+				TPD_INFO("item: %d get_test_item_info_v2 fail\n", LIMIT_TYPE_SLEF_TX_RX_DATA);
 				return ret | ERROR_PROD_TEST_DATA;
 			}
 		} else {
@@ -7044,14 +7044,14 @@ static int st80y_production_test_ss_ix_cx(struct seq_file *s, void *chip_data,
 	if (totCompData.ix_fm) {
 		if (!IS_ERR_OR_NULL(st_testdata->fp)) {
 			snprintf(data_buf, 64, "\n%s\n", "[SS IX Force data]");
-			tp_test_write(st_testdata->fp, st_testdata->length,
+			tp_test_write_v2(st_testdata->fp, st_testdata->length,
 				      data_buf, strlen(data_buf), st_testdata->pos);
 		}
 
 		for (i = 0; i < totCompData.header.force_node; i++) {
 			if (!IS_ERR_OR_NULL(st_testdata->fp)) {
 				snprintf(data_buf, 64, "%d,", totCompData.ix_fm[i]);
-				tp_test_write(st_testdata->fp, st_testdata->length, data_buf, strlen(data_buf),
+				tp_test_write_v2(st_testdata->fp, st_testdata->length, data_buf, strlen(data_buf),
 					      st_testdata->pos);
 			}
 		}
@@ -7060,14 +7060,14 @@ static int st80y_production_test_ss_ix_cx(struct seq_file *s, void *chip_data,
 	if (totCompData.ix_sn) {
 		if (!IS_ERR_OR_NULL(st_testdata->fp)) {
 			snprintf(data_buf, 64, "\n%s\n", "[SS IX Sense data]");
-			tp_test_write(st_testdata->fp, st_testdata->length,
+			tp_test_write_v2(st_testdata->fp, st_testdata->length,
 				      data_buf, strlen(data_buf), st_testdata->pos);
 		}
 
 		for (i = 0; i < totCompData.header.sense_node; i++) {
 			if (!IS_ERR_OR_NULL(st_testdata->fp)) {
 				snprintf(data_buf, 64, "%d,", totCompData.ix_sn[i]);
-				tp_test_write(st_testdata->fp, st_testdata->length, data_buf, strlen(data_buf),
+				tp_test_write_v2(st_testdata->fp, st_testdata->length, data_buf, strlen(data_buf),
 					      st_testdata->pos);
 			}
 		}

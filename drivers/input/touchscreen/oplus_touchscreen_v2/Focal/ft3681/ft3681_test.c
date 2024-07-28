@@ -160,12 +160,12 @@ int ft3681_output_data(int *buffer, struct chip_data_ft3681 *ts_data,
 
 	for (i = 0; i < data_volumn; i += 1) {
 		snprintf(data_buf, 64, "%d,", buffer[i]);
-		tp_test_write(focal_testdata->fp, focal_testdata->length, data_buf,
+		tp_test_write_v2(focal_testdata->fp, focal_testdata->length, data_buf,
 		              strlen(data_buf), focal_testdata->pos);
 
 		if (!((i + 1) % num_each_line) || (i == data_volumn - 1)) {
 			snprintf(data_buf, 64, "\n");
-			tp_test_write(focal_testdata->fp, focal_testdata->length, data_buf,
+			tp_test_write_v2(focal_testdata->fp, focal_testdata->length, data_buf,
 			              strlen(data_buf), focal_testdata->pos);
 		}
 	}
@@ -905,87 +905,87 @@ static void ft3681_autotest_populate_result_head(
 	/*header*/
 	buflen = snprintf(data_buf, 256, "ECC, 85, 170, IC Name, %s, IC Code, %x\n",
 	                  "FT3681", 0);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	buflen = snprintf(data_buf, 256, "TestItem Num, %d, ", 12);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	line_num = 11;
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ", "Noise Test", 14,
 	                  tx_num, rx_num, line_num, 1);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	line_num += tx_num;
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ", "Null Noise", 41,
 	                  1, 1, line_num, 1);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	line_num += 1;
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ", "Rawdata Test", 7,
 	                  tx_num, rx_num, line_num, 2);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	line_num += tx_num;
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ",
 	                  "Rawdata Uniformity Test", 16, tx_num, rx_num, line_num, 1);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	line_num += tx_num;
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ",
 	                  "Rawdata Uniformity Test", 16, tx_num, rx_num, line_num, 2);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	line_num += tx_num;
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ", "SCAP CB Test", 9,
 	                  2, rx_num, line_num, 1);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	line_num += 2;
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ", "SCAP CB Test", 9,
 	                  2, 1, line_num, 2);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	line_num += 2;
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ", "SCAP CB Test", 9,
 	                  2, rx_num, line_num, 3);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	line_num += 2;
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ", "SCAP CB Test", 9,
 	                  2, 1, line_num, 4);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	line_num += 2;
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ",
 	                  "SCAP Rawdata Test", 10, 2, rx_num, line_num, 1);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	line_num += 2;
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ",
 	                  "SCAP Rawdata Test", 10, 2, rx_num, line_num, 2);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	line_num += 2;
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ", "Panel Differ Test", 20,
 	                  tx_num, rx_num, line_num, 1);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	buflen = snprintf(data_buf, 256, "\n\n\n\n\n\n\n\n\n");
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 	              p_testdata->pos);
 
 	FTS_TEST_FUNC_EXIT();

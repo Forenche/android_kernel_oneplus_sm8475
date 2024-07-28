@@ -3169,7 +3169,7 @@ int hx_test_data_get(struct chip_data_hx83112a_nf *chip_info, uint32_t RAW[],
 
 	len += snprintf((testdata + len), SZ_SIZE - len, "\n%s", result);
 
-	tp_test_write(hx_testdata->fp, hx_testdata->length, testdata, len,
+	tp_test_write_v2(hx_testdata->fp, hx_testdata->length, testdata, len,
 		      hx_testdata->pos);
 
 	tp_devm_kfree(&chip_info->hx_spi->dev, (void **)testdata,
@@ -3919,10 +3919,10 @@ int mpTestFunc(struct chip_data_hx83112a_nf *chip_info, uint8_t checktype,
 		goto RET_OUT;
 	}
 
-	p_test_item_info = get_test_item_info(hx_testdata->fw, checktype);
+	p_test_item_info = get_test_item_info_v2(hx_testdata->fw, checktype);
 
 	if (!p_test_item_info) {
-		TPD_INFO("item: %s get_test_item_info fail\n",
+		TPD_INFO("item: %s get_test_item_info_v2 fail\n",
 			 g_himax_inspection_mode[checktype]);
 		goto RET_OUT;
 	}

@@ -3273,7 +3273,7 @@ int register_common_touch_device(struct touchpanel_data *pdata)
 	}
 
 	/*step 22 : createproc proc files interface*/
-	init_touchpanel_proc(ts);
+	init_touchpanel_proc_v2(ts);
 	init_touch_misc_device(ts);
 	if (ts->temperature_detect_support) {
 		ret = init_get_adc_channels(ts);
@@ -3410,7 +3410,7 @@ void unregister_common_touch_device(struct touchpanel_data *pdata)
 	/*step1 :free irq*/
 	devm_free_irq(ts->dev, ts->irq, ts);
 	/*step2 :free proc node*/
-	remove_touchpanel_proc(ts);
+	remove_touchpanel_proc_v2(ts);
 
 	/*step3 :free the hw resource*/
 	pdata->ts_ops->power_control(ts->chip_data, false);

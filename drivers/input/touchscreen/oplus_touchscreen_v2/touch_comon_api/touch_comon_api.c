@@ -11,7 +11,7 @@
 unsigned int tp_debug = 0;
 EXPORT_SYMBOL(tp_debug);
 
-void tp_disable_irq(struct device *dev, unsigned int irq)
+void tp_disable_irq_v2_v2(struct device *dev, unsigned int irq)
 {
 	unsigned long irqflags = 0;
 	struct touchpanel_data *ts = dev_get_drvdata(dev);
@@ -27,7 +27,7 @@ void tp_disable_irq(struct device *dev, unsigned int irq)
 	spin_unlock_irqrestore(&com_api_data->tp_irq_lock, irqflags);
 }
 
-void tp_enable_irq(struct device *dev, unsigned int irq)
+void tp_enable_irq_v2_v2(struct device *dev, unsigned int irq)
 {
 	unsigned long irqflags = 0;
 	struct touchpanel_data *ts = dev_get_drvdata(dev);

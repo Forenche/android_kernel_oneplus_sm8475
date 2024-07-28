@@ -146,12 +146,12 @@ int ft3518_output_data(int *buffer, struct chip_data_ft3518 *ts_data,
 
 	for (i = 0; i < data_volumn; i += 1) {
 		snprintf(data_buf, 64, "%d,", buffer[i]);
-		tp_test_write(focal_testdata->fp, focal_testdata->length, data_buf,
+		tp_test_write_v2(focal_testdata->fp, focal_testdata->length, data_buf,
 			      strlen(data_buf), focal_testdata->pos);
 
 		if (!((i + 1) % num_each_line) || (i == data_volumn - 1)) {
 			snprintf(data_buf, 64, "\n");
-			tp_test_write(focal_testdata->fp, focal_testdata->length, data_buf,
+			tp_test_write_v2(focal_testdata->fp, focal_testdata->length, data_buf,
 				      strlen(data_buf), focal_testdata->pos);
 		}
 	}
@@ -1476,55 +1476,55 @@ static void ft3518_autotest_populate_result_head(
 	/*header*/
 	buflen = snprintf(data_buf, 256, "ECC, 85, 170, IC Name, %s, IC Code, %x\n",
 			  "FT3518U", 0x5509);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 		      p_testdata->pos);
 
 	buflen = snprintf(data_buf, 256, "TestItem Num, %d, ", 8);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 		      p_testdata->pos);
 
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ", "Noise Test", 14,
 			  tx_num, rx_num, 11, 1);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 		      p_testdata->pos);
 
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ", "Rawdata Test", 7,
 			  tx_num, rx_num, 11 + tx_num, 2);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 		      p_testdata->pos);
 
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ",
 			  "Rawdata Uniformity Test", 16, tx_num, rx_num, 11 + tx_num * 2, 1);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 		      p_testdata->pos);
 
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ",
 			  "Rawdata Uniformity Test", 16, tx_num, rx_num, 11 + tx_num * 3, 2);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 		      p_testdata->pos);
 
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ", "SCAP CB Test", 9,
 			  2, rx_num, 11 + tx_num * 4, 1);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 		      p_testdata->pos);
 
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ", "SCAP CB Test", 9,
 			  2, rx_num, 11 + tx_num * 4 + 2, 2);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 		      p_testdata->pos);
 
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ",
 			  "SCAP Rawdata Test", 10, 2, rx_num, 11 + tx_num * 4 + 4, 1);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 		      p_testdata->pos);
 
 	buflen = snprintf(data_buf, 256, "%s, %d, %d, %d, %d, %d, ",
 			  "SCAP Rawdata Test", 10, 2, rx_num, 11 + tx_num * 4 + 6, 2);
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 		      p_testdata->pos);
 
 	buflen = snprintf(data_buf, 256, "\n\n\n\n\n\n\n\n\n");
-	tp_test_write(p_testdata->fp, p_testdata->length, data_buf, buflen,
+	tp_test_write_v2(p_testdata->fp, p_testdata->length, data_buf, buflen,
 		      p_testdata->pos);
 
 	FTS_TEST_FUNC_EXIT();
@@ -1758,7 +1758,7 @@ int ft3518_noise_autotest(struct seq_file *s, void *chip_data,
 	}
 
 	/*snprintf(data_buf, 64, "%s\n", "[FOCAL NOISE DATA]");
-	tp_test_write(focal_testdata->fp, focal_testdata->length, data_buf,
+	tp_test_write_v2(focal_testdata->fp, focal_testdata->length, data_buf,
 		      strlen(data_buf), focal_testdata->pos);*/
 	ft3518_output_data(ts_data->noise_rawdata, ts_data, focal_testdata, NODE_MATCH);
 
@@ -1942,7 +1942,7 @@ int ft3518_rawdata_autotest(struct seq_file *s, void *chip_data,
 	}
 
 	/*snprintf(data_buf, 64, "%s\n", "[FOCAL RAW DATA]");
-	tp_test_write(focal_testdata->fp, focal_testdata->length, data_buf,
+	tp_test_write_v2(focal_testdata->fp, focal_testdata->length, data_buf,
 		      strlen(data_buf), focal_testdata->pos);*/
 	ft3518_output_data(ts_data->rawdata, ts_data, focal_testdata, NODE_MATCH);
 
@@ -2061,7 +2061,7 @@ int ft3518_uniformity_autotest(struct seq_file *s, void *chip_data,
 	}
 
 	/*snprintf(data_buf, 64, "%s\n", "[FOCAL TX UNIFORMITY DATA]");
-	tp_test_write(focal_testdata->fp, focal_testdata->length, data_buf,
+	tp_test_write_v2(focal_testdata->fp, focal_testdata->length, data_buf,
 		      strlen(data_buf), focal_testdata->pos);*/
 	ft3518_output_data(rl_tmp, ts_data, focal_testdata, NODE_MATCH);
 
@@ -2102,7 +2102,7 @@ int ft3518_uniformity_autotest(struct seq_file *s, void *chip_data,
 	}
 
 	/*snprintf(data_buf, 64, "%s\n", "[FOCAL RX UNIFORMITY DATA]");
-	tp_test_write(focal_testdata->fp, focal_testdata->length, data_buf,
+	tp_test_write_v2(focal_testdata->fp, focal_testdata->length, data_buf,
 		      strlen(data_buf), focal_testdata->pos);*/
 	ft3518_output_data(rl_tmp, ts_data, focal_testdata, NODE_MATCH);
 
@@ -2225,7 +2225,7 @@ int ft3518_scap_cb_autotest(struct seq_file *s, void *chip_data,
 		rx_check = get_fw_wp(wc_sel, WATER_PROOF_ON_RX);
 
 		/*snprintf(data_buf, 64, "%s\n", "[FOCAL SCAP CB WP DATA]");
-		tp_test_write(focal_testdata->fp, focal_testdata->length, data_buf,
+		tp_test_write_v2(focal_testdata->fp, focal_testdata->length, data_buf,
 			      strlen(data_buf), focal_testdata->pos);*/
 		ft3518_output_data(scb_tmp, ts_data, focal_testdata, CHEN_MATCH);
 
@@ -2260,7 +2260,7 @@ int ft3518_scap_cb_autotest(struct seq_file *s, void *chip_data,
 		rx_check = get_fw_wp(wc_sel, WATER_PROOF_OFF_RX);
 
 		/*snprintf(data_buf, 64, "%s\n", "[FOCAL SCAP CB DATA]");
-		tp_test_write(focal_testdata->fp, focal_testdata->length, data_buf,
+		tp_test_write_v2(focal_testdata->fp, focal_testdata->length, data_buf,
 			      strlen(data_buf), focal_testdata->pos);*/
 		ft3518_output_data(scb_tmp, ts_data, focal_testdata, CHEN_MATCH);
 
@@ -2387,7 +2387,7 @@ int ft3518_scap_rawdata_autotest(struct seq_file *s, void *chip_data,
 		rx_check = get_fw_wp(wc_sel, WATER_PROOF_ON_RX);
 
 		/*snprintf(data_buf, 64, "%s\n", "[FOCAL SCAP RAWDATA WP DATA]");
-		tp_test_write(focal_testdata->fp, focal_testdata->length, data_buf,
+		tp_test_write_v2(focal_testdata->fp, focal_testdata->length, data_buf,
 			      strlen(data_buf), focal_testdata->pos);*/
 		ft3518_output_data(srawdata_tmp, ts_data, focal_testdata, CHEN_MATCH);
 
@@ -2419,7 +2419,7 @@ int ft3518_scap_rawdata_autotest(struct seq_file *s, void *chip_data,
 		rx_check = get_fw_wp(wc_sel, WATER_PROOF_OFF_RX);
 
 		/*snprintf(data_buf, 64, "%s\n", "[FOCAL SCAP RAWDATA DATA]");
-		tp_test_write(focal_testdata->fp, focal_testdata->length, data_buf,
+		tp_test_write_v2(focal_testdata->fp, focal_testdata->length, data_buf,
 			      strlen(data_buf), focal_testdata->pos);*/
 		ft3518_output_data(srawdata_tmp, ts_data, focal_testdata, CHEN_MATCH);
 

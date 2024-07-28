@@ -81,10 +81,10 @@ static int st_test_item(struct seq_file *s, struct touchpanel_data *ts,
 		}
 	}
 
-	p_test_item_info = get_test_item_info(p_st_testdata->fw, TYPE_TEST1);
+	p_test_item_info = get_test_item_info_v2(p_st_testdata->fw, TYPE_TEST1);
 
 	if (!p_test_item_info) {
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST1);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST1);
 
 	} else {
 		ret = gd_test_ops->test1(s, ts->chip_data, p_st_testdata, p_test_item_info);
@@ -97,10 +97,10 @@ static int st_test_item(struct seq_file *s, struct touchpanel_data *ts,
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(p_st_testdata->fw, TYPE_TEST2);
+	p_test_item_info = get_test_item_info_v2(p_st_testdata->fw, TYPE_TEST2);
 
 	if (!p_test_item_info) {
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST2);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST2);
 
 	} else {
 		ret = gd_test_ops->test2(s, ts->chip_data, p_st_testdata, p_test_item_info);
@@ -113,10 +113,10 @@ static int st_test_item(struct seq_file *s, struct touchpanel_data *ts,
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(p_st_testdata->fw, TYPE_TEST3);
+	p_test_item_info = get_test_item_info_v2(p_st_testdata->fw, TYPE_TEST3);
 
 	if (!p_test_item_info) {
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST3);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST3);
 
 	} else {
 		ret = gd_test_ops->test3(s, ts->chip_data, p_st_testdata, p_test_item_info);
@@ -129,10 +129,10 @@ static int st_test_item(struct seq_file *s, struct touchpanel_data *ts,
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(p_st_testdata->fw, TYPE_TEST4);
+	p_test_item_info = get_test_item_info_v2(p_st_testdata->fw, TYPE_TEST4);
 
 	if (!p_test_item_info) {
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST4);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST4);
 
 	} else {
 		ret = gd_test_ops->test4(s, ts->chip_data, p_st_testdata, p_test_item_info);
@@ -145,10 +145,10 @@ static int st_test_item(struct seq_file *s, struct touchpanel_data *ts,
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(p_st_testdata->fw, TYPE_TEST5);
+	p_test_item_info = get_test_item_info_v2(p_st_testdata->fw, TYPE_TEST5);
 
 	if (!p_test_item_info) {
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST5);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST5);
 
 	} else {
 		ret = gd_test_ops->test5(s, ts->chip_data, p_st_testdata, p_test_item_info);
@@ -161,10 +161,10 @@ static int st_test_item(struct seq_file *s, struct touchpanel_data *ts,
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(p_st_testdata->fw, TYPE_TEST6);
+	p_test_item_info = get_test_item_info_v2(p_st_testdata->fw, TYPE_TEST6);
 
 	if (!p_test_item_info) {
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST6);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST6);
 
 	} else {
 		ret = gd_test_ops->test6(s, ts->chip_data, p_st_testdata, p_test_item_info);
@@ -177,10 +177,10 @@ static int st_test_item(struct seq_file *s, struct touchpanel_data *ts,
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(p_st_testdata->fw, TYPE_TEST7);
+	p_test_item_info = get_test_item_info_v2(p_st_testdata->fw, TYPE_TEST7);
 
 	if (!p_test_item_info) {
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST7);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST7);
 
 	} else {
 		ret = gd_test_ops->test7(s, ts->chip_data, p_st_testdata, p_test_item_info);

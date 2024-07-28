@@ -198,10 +198,10 @@ static int  ilitek_get_item_para(struct auto_testdata *testdata,
 		return -1;
 	}
 
-	p_test_item_info = get_test_item_info(testdata->fw, item_index);
+	p_test_item_info = get_test_item_info_v2(testdata->fw, item_index);
 
 	if (!p_test_item_info) {
-		TPD_INFO("item: %d get_test_item_info fail\n", item_index);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", item_index);
 		ret = -1;
 
 	} else {
@@ -273,10 +273,10 @@ static int  ilitek_get_para_openshort(struct auto_testdata *testdata,
 		return -1;
 	}
 
-	p_test_item_info = get_test_item_info(testdata->fw, item_index);
+	p_test_item_info = get_test_item_info_v2(testdata->fw, item_index);
 
 	if (!p_test_item_info) {
-		TPD_INFO("item: %d get_test_item_info fail\n", item_index);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", item_index);
 		ret = -1;
 
 	} else {
@@ -1748,7 +1748,7 @@ static void mp_show_result(void *chip_data, struct auto_testdata *testdata)
 		goto fail_open;
 	}
 
-	tp_test_write(testdata->fp, testdata->length, csv, csv_len, testdata->pos);
+	tp_test_write_v2(testdata->fp, testdata->length, csv, csv_len, testdata->pos);
 	TPD_INFO("Writing Data into CSV succeed\n");
 
 fail_open:
@@ -2015,9 +2015,9 @@ static int ilitek_noise_peak_to_peak_with_panel(struct seq_file *s, void *chip_d
     int ret = 0;
     struct test_item_info *p_test_item_info = NULL;
 
-    p_test_item_info = get_test_item_info(ilitek_testdata->fw, TYPE_TEST2);
+    p_test_item_info = get_test_item_info_v2(ilitek_testdata->fw, TYPE_TEST2);
     if (!p_test_item_info) {
-        TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST2);
+        TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST2);
         ret = -1;
     } else {
 	    if (p_test_item_info->p_buffer[0] == 1) {
@@ -2039,10 +2039,10 @@ static int mp_get_timing_info(void *chip_data, struct auto_testdata *testdata)
 	struct test_item_info *p_test_item_info = NULL;
 	struct ilitek_tddi_dev *chip_info = (struct ilitek_tddi_dev *)chip_data;
 
-	p_test_item_info = get_test_item_info(testdata->fw, TYPE_TIMEING_INFO);
+	p_test_item_info = get_test_item_info_v2(testdata->fw, TYPE_TIMEING_INFO);
 
 	if (!p_test_item_info) {
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TIMEING_INFO);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TIMEING_INFO);
 		ret = -1;
 
 	} else {

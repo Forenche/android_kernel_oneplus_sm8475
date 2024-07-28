@@ -986,20 +986,20 @@ static ssize_t proc_fp_enable_read(struct file *file, char __user *buffer,
 DECLARE_PROC_OPS(tp_fp_enable_fops, simple_open, proc_fp_enable_read, proc_fp_enable_write, NULL);
 
 /*proc/touchpanel/baseline_test*/
-static int tp_auto_test_read_func(struct seq_file *s, void *v)
+static int tp_auto_test_v2_read_func(struct seq_file *s, void *v)
 {
 	int ret = 0;
 
-	ret = tp_auto_test(s, v);
+	ret = tp_auto_test_v2(s, v);
 	return ret;
 }
 
 static int baseline_autotest_open(struct inode *inode, struct file *file)
 {
-	return single_open(file, tp_auto_test_read_func, PDE_DATA(inode));
+	return single_open(file, tp_auto_test_v2_read_func, PDE_DATA(inode));
 }
 
-DECLARE_PROC_OPS(tp_auto_test_proc_fops, baseline_autotest_open, seq_read, NULL, single_release);
+DECLARE_PROC_OPS(tp_auto_test_v2_proc_fops, baseline_autotest_open, seq_read, NULL, single_release);
 
 
 /*black_screen_test - For incell ic black screen test*/
@@ -1042,20 +1042,20 @@ static ssize_t proc_black_screen_test_write(struct file *file,
 DECLARE_PROC_OPS(proc_black_screen_test_fops, simple_open, proc_black_screen_test_read, proc_black_screen_test_write, NULL);
 
 /*baseline_result - For GKI auto test result*/
-static int tp_auto_test_result_read(struct seq_file *s, void *v)
+static int tp_auto_test_v2_result_read(struct seq_file *s, void *v)
 {
 	int ret = 0;
 
-	ret = tp_auto_test_result(s, v);
+	ret = tp_auto_test_v2_result(s, v);
 	return ret;
 }
 
-static int tp_auto_test_result_open(struct inode *inode, struct file *file)
+static int tp_auto_test_v2_result_open(struct inode *inode, struct file *file)
 {
-	return single_open(file, tp_auto_test_result_read, PDE_DATA(inode));
+	return single_open(file, tp_auto_test_v2_result_read, PDE_DATA(inode));
 }
 
-DECLARE_PROC_OPS(tp_auto_test_result_fops, tp_auto_test_result_open, seq_read, NULL, single_release);
+DECLARE_PROC_OPS(tp_auto_test_v2_result_fops, tp_auto_test_v2_result_open, seq_read, NULL, single_release);
 
 
 /*baseline_result - For GKI auto test result*/
@@ -3043,13 +3043,13 @@ static int init_debug_info_proc(struct touchpanel_data *ts)
 }
 
 /**
- * init_touchpanel_proc - Using for create proc interface
+ * init_touchpanel_proc_v2 - Using for create proc interface
  * @ts: touchpanel_data struct using for common driver
  *
  * we need to set touchpanel_data struct as private_data to those file_inode
  * Returning zero(success) or negative errno(failed)
  */
-int init_touchpanel_proc(struct touchpanel_data *ts)
+int init_touchpanel_proc_v2(struct touchpanel_data *ts)
 {
 	int ret = 0;
 	int i = 0;
@@ -3103,14 +3103,14 @@ int init_touchpanel_proc(struct touchpanel_data *ts)
 			ts->fingerprint_underscreen_support
 		},
 		{
-			"baseline_test", 0666, NULL, &tp_auto_test_proc_fops, ts, false, true
+			"baseline_test", 0666, NULL, &tp_auto_test_v2_proc_fops, ts, false, true
 		},
 		{
 			"black_screen_test", 0666, NULL, &proc_black_screen_test_fops, ts, false,
 			ts->gesture_test_support
 		},
 		{
-			"baseline_result", 0666, NULL, &tp_auto_test_result_fops, ts, false, true
+			"baseline_result", 0666, NULL, &tp_auto_test_v2_result_fops, ts, false, true
 		},
 		{
 			"black_screen_result", 0666, NULL, &proc_black_screen_result_fops, ts, false,
@@ -3233,7 +3233,7 @@ int init_touchpanel_proc(struct touchpanel_data *ts)
 	return ret;
 }
 
-void remove_touchpanel_proc(struct touchpanel_data *ts)
+void remove_touchpanel_proc_v2(struct touchpanel_data *ts)
 {
 	char name[TP_NAME_SIZE_MAX];
 

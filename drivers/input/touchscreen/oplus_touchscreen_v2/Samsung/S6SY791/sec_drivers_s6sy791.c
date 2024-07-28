@@ -2414,114 +2414,114 @@ static int secy791_execute_selftest(struct seq_file *s,
 	rearrange_sft_result(rBuff, result_size);
 
 	sprintf(data_buf, "sec_ts : \n");
-	tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+	tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 			strlen(data_buf), sec_testdata->pos);
 
 	for (i = 0; i < 80; i += 4) {
 		if (i / 4 == 0) {
 			sprintf(data_buf, "SIG: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 1) {
 			sprintf(data_buf, "VER: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 2) {
 			sprintf(data_buf, "SIZ: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 3) {
 			sprintf(data_buf, "CRC: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 4) {
 			sprintf(data_buf, "RES: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 5) {
 			sprintf(data_buf, "COU: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 6) {
 			sprintf(data_buf, "PAS: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 7) {
 			sprintf(data_buf, "FAI: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 8) {
 			sprintf(data_buf, "CHA: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 9) {
 			sprintf(data_buf, "AMB: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 10) {
 			sprintf(data_buf, "RXS: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 11) {
 			sprintf(data_buf, "TXS: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 12) {
 			sprintf(data_buf, "RXO: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 13) {
 			sprintf(data_buf, "TXO: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 14) {
 			sprintf(data_buf, "RXG: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 15) {
 			sprintf(data_buf, "TXG: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 16) {
 			sprintf(data_buf, "RXR: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 17) {
 			sprintf(data_buf, "TXT: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 18) {
 			sprintf(data_buf, "RXT: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 
 		} else if (i / 4 == 19) {
 			sprintf(data_buf, "TXR: ");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 		}
 
 		sprintf(data_buf, "0x%02X, 0x%02X, 0x%02X, 0x%02X \n", rBuff[i], rBuff[i + 1],
 				rBuff[i + 2], rBuff[i + 3]);
-		tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+		tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 				strlen(data_buf), sec_testdata->pos);
 
 		if (i / 4 == 4) {
@@ -2555,7 +2555,7 @@ static int secy791_execute_selftest(struct seq_file *s,
 	}
 
 	sprintf(data_buf, "\n");
-	tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+	tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 			strlen(data_buf), sec_testdata->pos);
 
 ERR_EXIT:
@@ -2751,7 +2751,7 @@ static int secy791_mutual_raw_test(struct seq_file *s, void *chip_data,
 
 	/* store and judge reference data */
 	sprintf(data_buf, "TYPE_MUTUAL_RAW_OFFSET_DATA_SDC:\n");
-	tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+	tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 			strlen(data_buf), sec_testdata->pos);
 
 	for (i = 0; i <  sec_testdata->tx_num; i++) {
@@ -2761,7 +2761,7 @@ static int secy791_mutual_raw_test(struct seq_file *s, void *chip_data,
 
 			if (!IS_ERR_OR_NULL(sec_testdata->fp)) {
 				sprintf(data_buf, "%d, ", nodeData);
-				tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+				tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 						strlen(data_buf), sec_testdata->pos);
 			}
 
@@ -2781,14 +2781,14 @@ static int secy791_mutual_raw_test(struct seq_file *s, void *chip_data,
 
 		if (!IS_ERR_OR_NULL(sec_testdata->fp)) {
 			sprintf(data_buf, "\n");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 		}
 	}
 
 	/* CM Offseet gap (left-right)*/
 	sprintf(data_buf, "left-right gap:\n");
-	tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+	tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 			strlen(data_buf), sec_testdata->pos);
 
 	for (i = 0; i < sec_testdata->tx_num - 1; i++) {
@@ -2807,7 +2807,7 @@ static int secy791_mutual_raw_test(struct seq_file *s, void *chip_data,
 
 			if (!IS_ERR_OR_NULL(sec_testdata->fp)) {
 				sprintf(data_buf, "%d, ", nodeGap);
-				tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+				tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 						strlen(data_buf), sec_testdata->pos);
 			}
 
@@ -2830,14 +2830,14 @@ static int secy791_mutual_raw_test(struct seq_file *s, void *chip_data,
 
 		if (!IS_ERR_OR_NULL(sec_testdata->fp)) {
 			sprintf(data_buf, "\n");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 		}
 	}
 
 	/* CM Offseet gap (up-down)*/
 	sprintf(data_buf, "up-down gap:\n");
-	tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+	tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 			strlen(data_buf), sec_testdata->pos);
 
 	for (i = 0; i < sec_testdata->tx_num; i++) {
@@ -2856,7 +2856,7 @@ static int secy791_mutual_raw_test(struct seq_file *s, void *chip_data,
 
 			if (!IS_ERR_OR_NULL(sec_testdata->fp)) {
 				sprintf(data_buf,  "%d, ", nodeGap);
-				tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+				tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 						strlen(data_buf), sec_testdata->pos);
 			}
 
@@ -2879,7 +2879,7 @@ static int secy791_mutual_raw_test(struct seq_file *s, void *chip_data,
 
 		if (!IS_ERR_OR_NULL(sec_testdata->fp)) {
 			sprintf(data_buf, "\n");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 		}
 	}
@@ -2955,7 +2955,7 @@ static int secy791_self_offset_test(struct seq_file *s, void *chip_data,
 
 	/* store and judge self minimum frame data */
 	sprintf(data_buf, "TYPE_SELF_TX_OFFSET_DATA:\n");
-	tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+	tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 			strlen(data_buf), sec_testdata->pos);
 
 	/* check long channel of self data	*/
@@ -2964,7 +2964,7 @@ static int secy791_self_offset_test(struct seq_file *s, void *chip_data,
 
 		if (!IS_ERR_OR_NULL(sec_testdata->fp)) {
 			sprintf(data_buf, "%d, ", nodeData);
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 		}
 
@@ -2982,11 +2982,11 @@ static int secy791_self_offset_test(struct seq_file *s, void *chip_data,
 	}
 
 	sprintf(data_buf, "\n");
-	tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+	tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 			strlen(data_buf), sec_testdata->pos);
 
 	sprintf(data_buf, "TYPE_SELF_RX_OFFSET_DATA:\n");
-	tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+	tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 			strlen(data_buf), sec_testdata->pos);
 
 	/* check short channel of self data */
@@ -2996,7 +2996,7 @@ static int secy791_self_offset_test(struct seq_file *s, void *chip_data,
 
 		if (!IS_ERR_OR_NULL(sec_testdata->fp)) {
 			sprintf(data_buf, "%d, ", nodeData);
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 		}
 
@@ -3014,13 +3014,13 @@ static int secy791_self_offset_test(struct seq_file *s, void *chip_data,
 
 		if (!IS_ERR_OR_NULL(sec_testdata->fp)) {
 			sprintf(data_buf, "%d, ", nodeData);
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 		}
 	}
 
 	sprintf(data_buf, "\n");
-	tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+	tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 			strlen(data_buf), sec_testdata->pos);
 	return -err_cnt;
 }
@@ -3085,7 +3085,7 @@ static int secy791_mutual_raw_noise_test(struct seq_file *s, void *chip_data,
 	}
 
 	sprintf(data_buf, "TYPE_P2P_MIN_DATA:\n");
-	tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+	tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 			strlen(data_buf), sec_testdata->pos);
 
 	/* check minimum value */
@@ -3096,7 +3096,7 @@ static int secy791_mutual_raw_noise_test(struct seq_file *s, void *chip_data,
 
 			if (!IS_ERR_OR_NULL(sec_testdata->fp)) {
 				sprintf(data_buf, "%d, ", nodeData);
-				tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+				tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 						strlen(data_buf), sec_testdata->pos);
 			}
 
@@ -3115,7 +3115,7 @@ static int secy791_mutual_raw_noise_test(struct seq_file *s, void *chip_data,
 
 		if (!IS_ERR_OR_NULL(sec_testdata->fp)) {
 			sprintf(data_buf, "\n");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 		}
 	}
@@ -3145,7 +3145,7 @@ static int secy791_mutual_raw_noise_test(struct seq_file *s, void *chip_data,
 	}
 
 	sprintf(data_buf, "TYPE_P2P_MAX_DATA:\n");
-	tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+	tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 			strlen(data_buf), sec_testdata->pos);
 
 	/* check maximum value */
@@ -3156,7 +3156,7 @@ static int secy791_mutual_raw_noise_test(struct seq_file *s, void *chip_data,
 
 			if (!IS_ERR_OR_NULL(sec_testdata->fp)) {
 				sprintf(data_buf, "%d, ", nodeData);
-				tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+				tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 						strlen(data_buf), sec_testdata->pos);
 			}
 
@@ -3175,7 +3175,7 @@ static int secy791_mutual_raw_noise_test(struct seq_file *s, void *chip_data,
 
 		if (!IS_ERR_OR_NULL(sec_testdata->fp)) {
 			sprintf(data_buf, "\n");
-			tp_test_write(sec_testdata->fp, sec_testdata->length, data_buf,
+			tp_test_write_v2(sec_testdata->fp, sec_testdata->length, data_buf,
 					strlen(data_buf), sec_testdata->pos);
 		}
 	}

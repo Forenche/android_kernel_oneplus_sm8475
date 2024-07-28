@@ -1505,13 +1505,13 @@ void sha256_init(sha256_context_t *context)
 }
 
 /********************************************************************
- * Function Name: sha256
+ * Function Name: sha256_oplus
  * Description:   Perform sha256 hashing in one call
  *                [out] hash_value pointer to hash output
  *                [in] input_data pointer to data to hash
  *                [in] input_length byte length of hash data
  ********************************************************************/
-void sha256(uint8_t *hash_value, const uint8_t *input_data, const uint32_t input_length)
+void sha256_oplus(uint8_t *hash_value, const uint8_t *input_data, const uint32_t input_length)
 {
 	sha256_context_t ctx;
 

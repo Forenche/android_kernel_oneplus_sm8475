@@ -17,7 +17,7 @@
 #endif
 /*******Part1:Call Back Function implement*******/
 
-unsigned int extract_uint_le(const unsigned char *ptr)
+unsigned int extract_uint_le_v2(const unsigned char *ptr)
 {
 	return (unsigned int)ptr[0] +
 	       (unsigned int)ptr[1] * 0x100 +
@@ -59,7 +59,7 @@ static int syna_auto_test_irq(struct touchpanel_data *ts,
 	return eint_count;
 }
 
-int synaptics_auto_test(struct seq_file *s,  struct touchpanel_data *ts)
+int synaptics_auto_test_v2(struct seq_file *s,  struct touchpanel_data *ts)
 {
 	int ret = 0;
 	int error_count = 0;
@@ -151,7 +151,7 @@ int synaptics_auto_test(struct seq_file *s,  struct touchpanel_data *ts)
 		error_count++;
 		seq_printf(s, "eint_status is low, TP EINT direct stort\n");
 		sprintf(data_buf, "eint_status is low, TP EINT direct stort, \n");
-		tp_test_write(syna_testdata.fp, syna_testdata.length, data_buf,
+		tp_test_write_v2(syna_testdata.fp, syna_testdata.length, data_buf,
 			      strlen(data_buf), syna_testdata.pos);
 		ret = 0;
 		goto END;
@@ -165,10 +165,10 @@ int synaptics_auto_test(struct seq_file *s,  struct touchpanel_data *ts)
 				p_test_item_info);
 	}
 
-	p_test_item_info = get_test_item_info(syna_testdata.fw, TYPE_TEST1);
+	p_test_item_info = get_test_item_info_v2(syna_testdata.fw, TYPE_TEST1);
 
 	if (!p_test_item_info)
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST1);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST1);
 
 	else {
 		ret = syna_test_ops->test1(s, ts->chip_data, &syna_testdata, p_test_item_info);
@@ -182,10 +182,10 @@ int synaptics_auto_test(struct seq_file *s,  struct touchpanel_data *ts)
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(syna_testdata.fw, TYPE_TEST2);
+	p_test_item_info = get_test_item_info_v2(syna_testdata.fw, TYPE_TEST2);
 
 	if (!p_test_item_info)
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST2);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST2);
 
 	else {
 		ret = syna_test_ops->test2(s, ts->chip_data, &syna_testdata, p_test_item_info);
@@ -199,10 +199,10 @@ int synaptics_auto_test(struct seq_file *s,  struct touchpanel_data *ts)
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(syna_testdata.fw, TYPE_TEST3);
+	p_test_item_info = get_test_item_info_v2(syna_testdata.fw, TYPE_TEST3);
 
 	if (!p_test_item_info)
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST3);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST3);
 
 	else {
 		ret = syna_test_ops->test3(s, ts->chip_data, &syna_testdata, p_test_item_info);
@@ -216,10 +216,10 @@ int synaptics_auto_test(struct seq_file *s,  struct touchpanel_data *ts)
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(syna_testdata.fw, TYPE_TEST4);
+	p_test_item_info = get_test_item_info_v2(syna_testdata.fw, TYPE_TEST4);
 
 	if (!p_test_item_info)
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST4);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST4);
 
 	else {
 		ret = syna_test_ops->test4(s, ts->chip_data, &syna_testdata, p_test_item_info);
@@ -233,10 +233,10 @@ int synaptics_auto_test(struct seq_file *s,  struct touchpanel_data *ts)
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(syna_testdata.fw, TYPE_TEST5);
+	p_test_item_info = get_test_item_info_v2(syna_testdata.fw, TYPE_TEST5);
 
 	if (!p_test_item_info)
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST5);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST5);
 
 	else {
 		ret = syna_test_ops->test5(s, ts->chip_data, &syna_testdata, p_test_item_info);
@@ -250,10 +250,10 @@ int synaptics_auto_test(struct seq_file *s,  struct touchpanel_data *ts)
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(syna_testdata.fw, TYPE_TEST6);
+	p_test_item_info = get_test_item_info_v2(syna_testdata.fw, TYPE_TEST6);
 
 	if (!p_test_item_info)
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST6);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST6);
 
 	else {
 		ret = syna_test_ops->test6(s, ts->chip_data, &syna_testdata, p_test_item_info);
@@ -267,10 +267,10 @@ int synaptics_auto_test(struct seq_file *s,  struct touchpanel_data *ts)
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(syna_testdata.fw, TYPE_TEST7);
+	p_test_item_info = get_test_item_info_v2(syna_testdata.fw, TYPE_TEST7);
 
 	if (!p_test_item_info)
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST7);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST7);
 
 	else {
 		ret = syna_test_ops->test7(s, ts->chip_data, &syna_testdata, p_test_item_info);
@@ -284,10 +284,10 @@ int synaptics_auto_test(struct seq_file *s,  struct touchpanel_data *ts)
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(syna_testdata.fw, TYPE_TEST8);
+	p_test_item_info = get_test_item_info_v2(syna_testdata.fw, TYPE_TEST8);
 
 	if (!p_test_item_info)
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST8);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST8);
 
 	else {
 		ret = syna_test_ops->test8(s, ts->chip_data, &syna_testdata, p_test_item_info);
@@ -301,10 +301,10 @@ int synaptics_auto_test(struct seq_file *s,  struct touchpanel_data *ts)
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(syna_testdata.fw, TYPE_TEST9);
+	p_test_item_info = get_test_item_info_v2(syna_testdata.fw, TYPE_TEST9);
 
 	if (!p_test_item_info)
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST9);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST9);
 
 	else {
 		ret = syna_test_ops->test9(s, ts->chip_data, &syna_testdata, p_test_item_info);
@@ -318,10 +318,10 @@ int synaptics_auto_test(struct seq_file *s,  struct touchpanel_data *ts)
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(syna_testdata.fw, TYPE_TEST10);
+	p_test_item_info = get_test_item_info_v2(syna_testdata.fw, TYPE_TEST10);
 
 	if (!p_test_item_info)
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST10);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST10);
 
 	else {
 		ret = syna_test_ops->test10(s, ts->chip_data, &syna_testdata, p_test_item_info);
@@ -335,10 +335,10 @@ int synaptics_auto_test(struct seq_file *s,  struct touchpanel_data *ts)
 
 	tp_kfree((void **)&p_test_item_info);
 
-	p_test_item_info = get_test_item_info(syna_testdata.fw, TYPE_TEST11);
+	p_test_item_info = get_test_item_info_v2(syna_testdata.fw, TYPE_TEST11);
 
 	if (!p_test_item_info)
-		TPD_INFO("item: %d get_test_item_info fail\n", TYPE_TEST11);
+		TPD_INFO("item: %d get_test_item_info_v2 fail\n", TYPE_TEST11);
 
 	else {
 		ret = syna_test_ops->test11(s, ts->chip_data, &syna_testdata, p_test_item_info);
@@ -374,7 +374,7 @@ END:
 
 	return error_count;
 }
-EXPORT_SYMBOL(synaptics_auto_test);
+EXPORT_SYMBOL(synaptics_auto_test_v2);
 /*************************************auto test Funtion**************************************/
 
 /*************************************TCM Firmware Parse Funtion**************************************/
@@ -482,26 +482,26 @@ void synaptics_parse_header(struct image_header_data *header,
 {
 	struct image_header *data = (struct image_header *)fw_image;
 
-	header->checksum = extract_uint_le(data->checksum);
+	header->checksum = extract_uint_le_v2(data->checksum);
 	TPD_DEBUG(" checksume is %x", header->checksum);
 
 	header->bootloader_version = data->bootloader_version;
 	TPD_DEBUG(" bootloader_version is %d\n", header->bootloader_version);
 
-	header->firmware_size = extract_uint_le(data->firmware_size);
+	header->firmware_size = extract_uint_le_v2(data->firmware_size);
 	TPD_DEBUG(" firmware_size is %x\n", header->firmware_size);
 
-	header->config_size = extract_uint_le(data->config_size);
+	header->config_size = extract_uint_le_v2(data->config_size);
 	TPD_DEBUG(" header->config_size is %x\n", header->config_size);
 
 	/* only available in s4322 , reserved in other, begin*/
-	header->bootloader_offset = extract_uint_le(data->bootloader_addr);
-	header->bootloader_size = extract_uint_le(data->bootloader_size);
+	header->bootloader_offset = extract_uint_le_v2(data->bootloader_addr);
+	header->bootloader_size = extract_uint_le_v2(data->bootloader_size);
 	TPD_DEBUG(" header->bootloader_offset is %x\n", header->bootloader_offset);
 	TPD_DEBUG(" header->bootloader_size is %x\n", header->bootloader_size);
 
-	header->disp_config_offset = extract_uint_le(data->dsp_cfg_addr);
-	header->disp_config_size = extract_uint_le(data->dsp_cfg_size);
+	header->disp_config_offset = extract_uint_le_v2(data->dsp_cfg_addr);
+	header->disp_config_size = extract_uint_le_v2(data->dsp_cfg_size);
 	TPD_DEBUG(" header->disp_config_offset is %x\n", header->disp_config_offset);
 	TPD_DEBUG(" header->disp_config_size is %x\n", header->disp_config_size);
 	/* only available in s4322 , reserved in other ,  end*/
@@ -516,7 +516,7 @@ void synaptics_parse_header(struct image_header_data *header,
 		  header->contains_firmware_id);
 
 	if (header->contains_firmware_id)
-		header->firmware_id = extract_uint_le(data->firmware_id);
+		header->firmware_id = extract_uint_le_v2(data->firmware_id);
 
 	return;
 }

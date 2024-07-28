@@ -22,7 +22,7 @@
 #endif
 /*******End of LOG TAG Declear***********************************/
 /**
- * tp_test_write - instead of vfs_write,save test result to memory
+ * tp_test_write_v2 - instead of vfs_write,save test result to memory
  * @data_start: pointer to memory buffer
  * @max_count: max length for memory buffer
  * @buf: new buffer
@@ -31,7 +31,7 @@
  * we can using this function to get item offset form index item
  * Returning parameter number(success) or negative errno(failed)
  */
-ssize_t tp_test_write(void *data_start, size_t max_count,
+ssize_t tp_test_write_v2(void *data_start, size_t max_count,
 		      const char *buf, size_t count, ssize_t *pos)
 {
 	ssize_t ret = 0;
@@ -58,17 +58,17 @@ ssize_t tp_test_write(void *data_start, size_t max_count,
 	return ret;
 }
 
-EXPORT_SYMBOL(tp_test_write);
+EXPORT_SYMBOL(tp_test_write_v2);
 
 /**
- * search_for_item_offset - get each item offset form test limit fw
+ * search_for_item_offset_v2 - get each item offset form test limit fw
  * @fw: pointer to fw
  * @item_cnt: max item number
  * @item_index: item index
  * we can using this function to get item offset form index item
  * Returning parameter number(success) or negative errno(failed)
  */
-uint32_t search_for_item_offset(const struct firmware *fw, int item_cnt,
+uint32_t search_for_item_offset_v2(const struct firmware *fw, int item_cnt,
 				uint8_t item_index)
 {
 	int i = 0;
@@ -121,7 +121,7 @@ int32_t *getpara_for_item(const struct firmware *fw, uint8_t item_index,
 	}
 
 	/*step3: find item_index offset from the limit img*/
-	item_offset = search_for_item_offset(fw, item_cnt, item_index);
+	item_offset = search_for_item_offset_v2(fw, item_cnt, item_index);
 
 	if (item_offset == 0) {
 		TPD_INFO("search for item limit offset failed\n");
@@ -163,7 +163,7 @@ EXPORT_SYMBOL(getpara_for_item);
  * we can using this function to get infomation form index item
  * Returning pointer to test_item_info buffer
  */
-struct test_item_info *get_test_item_info(const struct firmware *fw,
+struct test_item_info *get_test_item_info_v2(const struct firmware *fw,
 		uint8_t item_index)
 {
 	uint32_t item_offset = 0;
@@ -198,7 +198,7 @@ struct test_item_info *get_test_item_info(const struct firmware *fw,
 	}
 
 	/*step3: find item_index offset from the limit img*/
-	item_offset = search_for_item_offset(fw, item_cnt, item_index);
+	item_offset = search_for_item_offset_v2(fw, item_cnt, item_index);
 
 	if (item_offset == 0) {
 		TPD_INFO("search for item limit offset failed\n");
@@ -249,7 +249,7 @@ ERROR:
 	tp_kfree((void **)&p);
 	return NULL;
 }
-EXPORT_SYMBOL(get_test_item_info);
+EXPORT_SYMBOL(get_test_item_info_v2);
 
 /**
  * save_test_result - save test result to file
@@ -280,7 +280,7 @@ int save_test_result(struct auto_testdata *p_auto_testdata,
 	}
 
 	snprintf(data_buf, 64, "[%s]\n", limit_name);
-	tp_test_write(p_auto_testdata->fp, p_auto_testdata->length, data_buf,
+	tp_test_write_v2(p_auto_testdata->fp, p_auto_testdata->length, data_buf,
 		      strlen(data_buf), p_auto_testdata->pos);
 
 	if (limit_type == LIMIT_TYPE_TX_RX_DATA) {
@@ -289,18 +289,18 @@ int save_test_result(struct auto_testdata *p_auto_testdata,
 		}
 		for (i = 0; i < p_auto_testdata->rx_num * p_auto_testdata->tx_num; i++) {
 			snprintf(data_buf, 64, "%d,", data[i]);
-			tp_test_write(p_auto_testdata->fp, p_auto_testdata->length, data_buf,
+			tp_test_write_v2(p_auto_testdata->fp, p_auto_testdata->length, data_buf,
 				      strlen(data_buf), p_auto_testdata->pos);
 
 			if (!((i + 1) % p_auto_testdata->rx_num) && (i != 0)) {
 				snprintf(data_buf, 64, "\n");
-				tp_test_write(p_auto_testdata->fp, p_auto_testdata->length, data_buf,
+				tp_test_write_v2(p_auto_testdata->fp, p_auto_testdata->length, data_buf,
 					      strlen(data_buf), p_auto_testdata->pos);
 			}
 		}
 
 		snprintf(data_buf, 64, "\n");
-		tp_test_write(p_auto_testdata->fp, p_auto_testdata->length, data_buf,
+		tp_test_write_v2(p_auto_testdata->fp, p_auto_testdata->length, data_buf,
 			      strlen(data_buf), p_auto_testdata->pos);
 
 	} else if (limit_type == LIMIT_TYPE_SLEF_TX_RX_DATA) {
@@ -309,12 +309,12 @@ int save_test_result(struct auto_testdata *p_auto_testdata,
 		}
 		for (i = 0; i < p_auto_testdata->rx_num + p_auto_testdata->tx_num; i++) {
 			snprintf(data_buf, 64, "%d,", data[i]);
-			tp_test_write(p_auto_testdata->fp, p_auto_testdata->length, data_buf,
+			tp_test_write_v2(p_auto_testdata->fp, p_auto_testdata->length, data_buf,
 				      strlen(data_buf), p_auto_testdata->pos);
 		}
 
 		snprintf(data_buf, 64, "\n");
-		tp_test_write(p_auto_testdata->fp, p_auto_testdata->length, data_buf,
+		tp_test_write_v2(p_auto_testdata->fp, p_auto_testdata->length, data_buf,
 			      strlen(data_buf), p_auto_testdata->pos);
 	}
 
@@ -616,7 +616,7 @@ void tp_limit_read(struct seq_file *s, struct touchpanel_data *ts)
 }
 EXPORT_SYMBOL(tp_limit_read);
 
-int tp_auto_test(struct seq_file *s, void *v)
+int tp_auto_test_v2(struct seq_file *s, void *v)
 {
 	struct touchpanel_data *ts = s->private;
 	int ret = 0;
@@ -830,7 +830,7 @@ OUT:
 	return ret;
 }
 
-int tp_auto_test_result(struct seq_file *s, void *v)
+int tp_auto_test_v2_result(struct seq_file *s, void *v)
 {
 	struct touchpanel_data *ts = s->private;
 

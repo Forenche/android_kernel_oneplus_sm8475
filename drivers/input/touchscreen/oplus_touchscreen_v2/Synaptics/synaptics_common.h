@@ -238,6 +238,6 @@ void synaptics_parse_header(struct image_header_data *header,
 			    const unsigned char *fw_image);
 int synaptics_parse_header_v2(struct image_info *image_info,
 			      const unsigned char *fw_image);
-int synaptics_auto_test(struct seq_file *s,  struct touchpanel_data *ts);
+int synaptics_auto_test_v2(struct seq_file *s,  struct touchpanel_data *ts);
 
 #endif  /*SYNAPTICS_H*/

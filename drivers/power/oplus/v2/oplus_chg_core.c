@@ -99,7 +99,7 @@ bool __attribute__((weak)) qpnp_is_power_off_charging(void)
 #endif
 #endif
 
-bool oplus_is_power_off_charging(void)
+bool oplus_is_power_off_charging_v2(void)
 {
 #ifndef CONFIG_DISABLE_OPLUS_FUNCTION
 #ifdef CONFIG_OPLUS_CHARGER_MTK

@@ -89,23 +89,23 @@ struct test_item_info {
 	uint32_t     item_offset;            /*item offset*/
 };
 
-uint32_t search_for_item_offset(const struct firmware *fw, int item_cnt,
+uint32_t search_for_item_offset_v2(const struct firmware *fw, int item_cnt,
 				uint8_t item_index);
 int32_t *getpara_for_item(const struct firmware *fw, uint8_t item_index,
 			  uint32_t *para_num);
-struct test_item_info *get_test_item_info(const struct firmware *fw,
+struct test_item_info *get_test_item_info_v2(const struct firmware *fw,
 		uint8_t item_index);
 int save_test_result(struct auto_testdata *p_auto_testdata,
 		     short  *data, int data_size, enum limit_type limit_type,
 		     char  *limit_name);
-ssize_t tp_test_write(void *data_start, size_t max_count,
+ssize_t tp_test_write_v2(void *data_start, size_t max_count,
 		      const char *buf, size_t count, ssize_t *pos);
 
 void tp_limit_read(struct seq_file *s, struct touchpanel_data *ts);
-int tp_auto_test(struct seq_file *s, void *v);
+int tp_auto_test_v2(struct seq_file *s, void *v);
 int tp_black_screen_test(struct file *file, char __user *buffer, size_t count,
 			 loff_t *ppos);
-int tp_auto_test_result(struct seq_file *s, void *v);
+int tp_auto_test_v2_result(struct seq_file *s, void *v);
 int tp_black_screen_result(struct seq_file *s, void *v);
 
 #endif /*_TOUCHPANEL_AUTOTEST_H_*/
