@@ -63,9 +63,11 @@ LINUXINCLUDE +=                                 \
 	-I$(KERNEL_ROOT)                            \
 	$(addprefix -I,$(cam_include_dirs))         \
 	-I$(CAMERA_KERNEL_ROOT)/include/uapi/camera \
+	-I$(CAMERA_KERNEL_ROOT)/include/uapi/camera/media \
+	-I$(CAMERA_KERNEL_ROOT)/include/uapi/camera/oplus/media \
 	-I$(CAMERA_KERNEL_ROOT)/
 # Optional include directories
-ccflags-$(CONFIG_MSM_GLOBAL_SYNX) += -I$(KERNEL_ROOT)/drivers/media/platform/msm/synx
+ccflags-$(CONFIG_MSM_GLOBAL_SYNX) += -I$(srctree)/drivers/media/platform/msm/synx
 
 # After creating lists, add content of 'ccflags-m' variable to 'ccflags-y' one.
 ccflags-y += ${ccflags-m}
