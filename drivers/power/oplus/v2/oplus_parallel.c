@@ -1895,7 +1895,7 @@ static void oplus_switch_subscribe_main_gauge_topic(struct oplus_mms *topic,
 #else
 		if (get_boot_mode() == MSM_BOOT_MODE__FACTORY) {
 #endif
-			if (oplus_is_rf_ftm_mode()) {
+			if (oplus_is_rf_ftm_mode_v2()) {
 				chg_err("boot_mode: %d, disabled mos\n", get_boot_mode());
 				rc = oplus_chg_ic_func(chip->ic_dev, OPLUS_IC_FUNC_SET_HW_ENABLE, false);
 				if (rc < 0)
@@ -1956,7 +1956,7 @@ static void oplus_switch_subscribe_sub_gauge_topic(struct oplus_mms *topic,
 #else
 		if (get_boot_mode() == MSM_BOOT_MODE__FACTORY) {
 #endif
-			if (oplus_is_rf_ftm_mode()) {
+			if (oplus_is_rf_ftm_mode_v2()) {
 				chg_err("boot_mode: %d, disabled mos\n", get_boot_mode());
 				rc = oplus_chg_ic_func(chip->ic_dev, OPLUS_IC_FUNC_SET_HW_ENABLE, false);
 				if (rc < 0)

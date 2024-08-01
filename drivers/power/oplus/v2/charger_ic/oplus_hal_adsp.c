@@ -5359,7 +5359,7 @@ static int oplus_chg_8350_output_suspend(struct oplus_chg_ic_dev *ic_dev, bool s
 
 	bcdev = oplus_chg_ic_get_drvdata(ic_dev);
 	pst = &bcdev->psy_list[PSY_TYPE_BATTERY];
-	is_rf_ftm_mode = oplus_is_rf_ftm_mode();
+	is_rf_ftm_mode = oplus_is_rf_ftm_mode_v2();
 
 	if (!suspend && is_rf_ftm_mode) {
 		chg_info("is_rf_ftm_mode, force disable charger");

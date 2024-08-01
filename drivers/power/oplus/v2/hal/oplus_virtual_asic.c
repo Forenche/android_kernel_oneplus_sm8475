@@ -529,7 +529,7 @@ static int oplus_chg_va_reset_active_force(struct oplus_chg_ic_dev *ic_dev)
 	}
 	va = oplus_chg_ic_get_drvdata(ic_dev);
 
-	if (va->vooc_ic_type == OPLUS_VOOC_IC_RK826 && oplus_is_rf_ftm_mode()) {
+	if (va->vooc_ic_type == OPLUS_VOOC_IC_RK826 && oplus_is_rf_ftm_mode_v2()) {
 		chg_debug("rk826, rf or ftm mode\n");
 		return 0;
 	}

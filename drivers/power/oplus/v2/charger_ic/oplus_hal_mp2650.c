@@ -1468,7 +1468,7 @@ int mp2650_2_get_vbus_voltage_2(void)
 	if (!chip)
 		return 0;
 
-	if (oplus_is_rf_ftm_mode()) {
+	if (oplus_is_rf_ftm_mode_v2()) {
 		mp2650_2_enable_adc_detect_2(true);
 		msleep(1);
 	}
@@ -1499,7 +1499,7 @@ int mp2650_2_get_vbus_voltage_2(void)
 
 	chg_debug("vbus_vol = %d \n", vbus_vol);
 
-	if (oplus_is_rf_ftm_mode())
+	if (oplus_is_rf_ftm_mode_v2())
 		mp2650_2_enable_adc_detect_2(false);
 
 	return vbus_vol;
