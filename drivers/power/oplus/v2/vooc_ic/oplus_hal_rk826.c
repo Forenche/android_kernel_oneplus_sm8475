@@ -70,7 +70,7 @@ struct rk826_chip {
 	char *fw_path;
 };
 
-extern int charger_abnormal_log;
+extern int charger_abnormal_log_v2;
 
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 10, 0))
 int __attribute__((weak))
@@ -936,7 +936,7 @@ static int rk826_fw_write_00_code(struct rk826_chip *chip, const u8 *fw_buf,
 	return 0;
 
 update_fw_err:
-	charger_abnormal_log = CRITICAL_LOG_VOOC_FW_UPDATE_ERR;
+	charger_abnormal_log_v2 = CRITICAL_LOG_VOOC_FW_UPDATE_ERR;
 	chg_err("fail\n");
 	return 1;
 }
@@ -1056,7 +1056,7 @@ static int rk826_fw_write_ff_code(struct rk826_chip *chip, const u8 *fw_buf,
 	return 0;
 
 update_fw_err:
-	charger_abnormal_log = CRITICAL_LOG_VOOC_FW_UPDATE_ERR;
+	charger_abnormal_log_v2 = CRITICAL_LOG_VOOC_FW_UPDATE_ERR;
 	chg_err("fail\n");
 	return 1;
 }
@@ -1215,7 +1215,7 @@ static int rk826_fw_update(struct rk826_chip *chip, const u8 *fw_buf,
 	return 0;
 
 update_fw_err:
-	charger_abnormal_log = CRITICAL_LOG_VOOC_FW_UPDATE_ERR;
+	charger_abnormal_log_v2 = CRITICAL_LOG_VOOC_FW_UPDATE_ERR;
 	chg_err("fail\n");
 	return 1;
 }
@@ -1227,7 +1227,7 @@ static int rk826_get_fw_verion_from_ic(struct rk826_chip *chip)
 	int rc = 0;
 	int update_result = 0;
 
-	if (oplus_is_power_off_charging() || oplus_is_charger_reboot()) {
+	if (oplus_is_power_off_charging() || oplus_is_charger_reboot_v2()) {
 		chip->upgrading = true;
 		update_result = rk826_fw_update(chip, chip->firmware_data,
 						chip->fw_data_count);
@@ -1277,7 +1277,7 @@ static int __rk826_fw_check_then_recover(struct rk826_chip *chip)
 	u8 value_buf[2] = { 0 };
 	int fw_check_err = 0;
 
-	if (oplus_is_rf_ftm_mode()) {
+	if (oplus_is_rf_ftm_mode_v2()) {
 		rk826_set_reset_sleep(chip);
 		return 0;
 	}
@@ -1291,7 +1291,7 @@ static int __rk826_fw_check_then_recover(struct rk826_chip *chip)
 	}
 
 	if (oplus_is_power_off_charging() == true ||
-	    oplus_is_charger_reboot() == true) {
+	    oplus_is_charger_reboot_v2() == true) {
 		chip->upgrading = true;
 		rk826_set_reset_active_force(chip);
 		msleep(5);
@@ -1403,7 +1403,7 @@ static int __rk826_fw_check_then_recover_fix(struct rk826_chip *chip)
 	u32 force_dis_update_flag = 0x00000000;
 	u32 sw_reset_flag = SW_RESET_FLAG;
 
-	if (!oplus_is_rf_ftm_mode() && chip->vooc_fw_update_newmethod)
+	if (!oplus_is_rf_ftm_mode_v2() && chip->vooc_fw_update_newmethod)
 		(void)rk826_parse_fw_data_by_bin(chip);
 	if (!chip->firmware_data) {
 		chg_err("rk826_fw_data Null, Return\n");
@@ -1413,7 +1413,7 @@ static int __rk826_fw_check_then_recover_fix(struct rk826_chip *chip)
 	}
 
 	if (oplus_is_power_off_charging() == true ||
-	    oplus_is_charger_reboot() == true) {
+	    oplus_is_charger_reboot_v2() == true) {
 		chip->upgrading = true;
 		rk826_set_reset_active_force(chip);
 		msleep(5);

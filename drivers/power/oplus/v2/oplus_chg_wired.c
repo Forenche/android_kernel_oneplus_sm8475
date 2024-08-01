@@ -1072,7 +1072,7 @@ static void oplus_wired_subscribe_wired_topic(struct oplus_mms *topic,
 		oplus_wired_qc_detect_enable(true);
 	else
 		oplus_wired_qc_detect_enable(false);
-	if (oplus_is_rf_ftm_mode())
+	if (oplus_is_rf_ftm_mode_v2())
 		vote(chip->input_suspend_votable, WLAN_VOTER, true, 1, false);
 
 	oplus_mms_get_item_data(chip->wired_topic, WIRED_ITEM_ONLINE, &data,

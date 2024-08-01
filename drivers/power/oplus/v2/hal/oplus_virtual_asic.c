@@ -529,7 +529,7 @@ static int oplus_chg_va_reset_active_force(struct oplus_chg_ic_dev *ic_dev)
 	}
 	va = oplus_chg_ic_get_drvdata(ic_dev);
 
-	if (va->vooc_ic_type == OPLUS_VOOC_IC_RK826 && oplus_is_rf_ftm_mode()) {
+	if (va->vooc_ic_type == OPLUS_VOOC_IC_RK826 && oplus_is_rf_ftm_mode_v2()) {
 		chg_debug("rk826, rf or ftm mode\n");
 		return 0;
 	}
@@ -1141,7 +1141,7 @@ static int oplus_chg_va_get_curve_current(struct oplus_chg_ic_dev *ic_dev, int *
 	return 0;
 }
 
-static bool oplus_vooc_get_fastchg_started(void)
+static bool oplus_vooc_get_fastchg_started_v2(void)
 {
 	bool fastchg_started_status = false;
 	struct oplus_mms *vooc_topic;
@@ -1172,7 +1172,7 @@ static int oplus_chg_va_set_shutdown_switch_mode(struct oplus_chg_ic_dev *ic_dev
 	chg_info("enter\n");
 	rc = oplus_chg_va_set_switch_mode(ic_dev, VOOC_SWITCH_MODE_NORMAL);
 	msleep(10);
-	if (oplus_vooc_get_fastchg_started() == true) {
+	if (oplus_vooc_get_fastchg_started_v2() == true) {
 		rc = oplus_chg_va_set_clock_sleep(ic_dev);
 		msleep(10);
 		rc = oplus_chg_va_reset_active(ic_dev);

@@ -463,7 +463,7 @@ static struct miscdevice oplus_chg_device = {
 	.fops = &oplus_chg_fops,
 };
 
-static int oplus_vooc_get_fastchg_started(void)
+static int oplus_vooc_get_fastchg_started_v2(void)
 {
 	int fastchg_started_status = 0;
 	struct oplus_mms *vooc_topic;
@@ -518,7 +518,7 @@ static int oplus_switching_get_if_need_balance_bat(int vbat0_mv, int vbat1_mv)
 			return PARALLEL_BAT_BALANCE_ERROR_STATUS8;
 		}
 
-		if (oplus_vooc_get_fastchg_started() == true && atomic_read(&chip->mos_lock)) {
+		if (oplus_vooc_get_fastchg_started_v2() == true && atomic_read(&chip->mos_lock)) {
 			if (oplus_switching_get_hw_enable() &&
 			    (abs(chip->sub_ibat_ma) < g_parallel_chip->parallel_mos_abnormal_litter_curr ||
 			    abs(chip->main_ibat_ma) < g_parallel_chip->parallel_mos_abnormal_litter_curr) &&
@@ -1169,7 +1169,7 @@ int oplus_chg_is_parellel_ibat_over_spec(int main_temp, int sub_temp, int *targe
 		if (sub_curr_now > 0)
 			sub_curr_radio = (main_curr_now + sub_curr_now) * RATIO_ACC / sub_curr_now;
 
-		if (oplus_vooc_get_fastchg_started() &&
+		if (oplus_vooc_get_fastchg_started_v2() &&
 		    (curr_radio > chip->track_unbalance_high ||
 		     curr_radio < chip->track_unbalance_low)) {
 			if (chip->unbalance_count < OUT_OF_BALANCE_COUNT)
@@ -1484,7 +1484,7 @@ static int parallel_chg_check_balance_bat_status(void)
   				&data, false);
 	chip->vooc_online_keep = data.intval;
 	if (chip->vooc_online_keep &&
-	    !oplus_vooc_get_fastchg_started() &&
+	    !oplus_vooc_get_fastchg_started_v2() &&
 	    status != PARALLEL_BAT_BALANCE_ERROR_STATUS8 && status != PARALLEL_BAT_BALANCE_ERROR_STATUS9) {
 		chg_err("fastchg_to_normal or fastchg_to_warm,no need balance");
 		chip->balancing_bat_status = PARALLEL_NOT_NEED_BALANCE_BAT__START_CHARGE;
@@ -1895,7 +1895,7 @@ static void oplus_switch_subscribe_main_gauge_topic(struct oplus_mms *topic,
 #else
 		if (get_boot_mode() == MSM_BOOT_MODE__FACTORY) {
 #endif
-			if (oplus_is_rf_ftm_mode()) {
+			if (oplus_is_rf_ftm_mode_v2()) {
 				chg_err("boot_mode: %d, disabled mos\n", get_boot_mode());
 				rc = oplus_chg_ic_func(chip->ic_dev, OPLUS_IC_FUNC_SET_HW_ENABLE, false);
 				if (rc < 0)
@@ -1956,7 +1956,7 @@ static void oplus_switch_subscribe_sub_gauge_topic(struct oplus_mms *topic,
 #else
 		if (get_boot_mode() == MSM_BOOT_MODE__FACTORY) {
 #endif
-			if (oplus_is_rf_ftm_mode()) {
+			if (oplus_is_rf_ftm_mode_v2()) {
 				chg_err("boot_mode: %d, disabled mos\n", get_boot_mode());
 				rc = oplus_chg_ic_func(chip->ic_dev, OPLUS_IC_FUNC_SET_HW_ENABLE, false);
 				if (rc < 0)
@@ -2270,7 +2270,7 @@ static void oplus_parallel_curr_spec_check_work(struct work_struct *work)
 		if (chip->wired_online) {
 			chip->target_curr_limit = target_curr;
 			oplus_parallel_curr_limit_publish(chip);
-			if (oplus_vooc_get_fastchg_started()) {
+			if (oplus_vooc_get_fastchg_started_v2()) {
 				if (oplus_support_normal_batt_spec_check())
 					oplus_comm_chg_disable_vote_fcc(PARALLEL_VOTER);
 			} else {

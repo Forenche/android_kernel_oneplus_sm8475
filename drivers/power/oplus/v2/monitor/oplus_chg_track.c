@@ -3156,7 +3156,7 @@ static int oplus_chg_track_upload_trigger_data(oplus_chg_track_trigger data)
 		 chip->trigger_data.crux_info);
 	chip->trigger_data_ok = true;
 	oplus_chg_track_get_flag_tag(chip->trigger_data.flag_reason, flag_reason_tag);
-	chg_exception_report(&chip->track_cfg.exception_data, chip->trigger_data.type_reason,
+	chg_exception_report_v2(&chip->track_cfg.exception_data, chip->trigger_data.type_reason,
 				chip->trigger_data.flag_reason, flag_reason_tag, sizeof(flag_reason_tag));
 	mutex_unlock(&chip->trigger_data_lock);
 	reinit_completion(&chip->trigger_ack);

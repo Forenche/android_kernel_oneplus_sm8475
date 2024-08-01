@@ -454,7 +454,7 @@ static int mt6375_guage_driver_probe(struct platform_device *pdev)
 	chg_info("register %s\n", chip->dev->of_node->name);
 
 #ifndef CONFIG_OPLUS_CHARGER_MTK
-	oplus_vooc_get_fastchg_started_pfunc(&oplus_vooc_get_fastchg_started);
+	oplus_vooc_get_fastchg_started_v2_pfunc(&oplus_vooc_get_fastchg_started_v2);
 	oplus_vooc_get_fastchg_ing_pfunc(&oplus_vooc_get_fastchg_ing);
 #endif
 

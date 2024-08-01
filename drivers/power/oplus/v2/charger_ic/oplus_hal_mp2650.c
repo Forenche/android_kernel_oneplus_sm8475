@@ -383,7 +383,7 @@ int mp2650_mms_set_vindpm_vol(struct oplus_chg_ic_dev *ic_dev, int vol_mv) /* de
 	return rc;
 }
 
-int mp2650_set_vindpm_vol(int vol) /* default 4.5V */
+int mp2650_set_vindpm_vol_v2(int vol) /* default 4.5V */
 {
 	int rc;
 	int tmp = 0;
@@ -406,7 +406,7 @@ int mp2650_usbin_input_current_limit[] = {
 	500, 800, 1000, 1200, 1500, 1750, 2000, 2200, 2500, 2750, 3000,
 };
 
-int mp2650_input_Ilimit_disable(void)
+int mp2650_input_Ilimit_disable_v2(void)
 {
 	int rc = 0;
 	struct chip_mp2650 *chip = charger_ic;
@@ -417,7 +417,7 @@ int mp2650_input_Ilimit_disable(void)
 	return rc;
 }
 
-int mp2650_input_current_limit_ctrl_by_vooc_write(int current_ma)
+int mp2650_input_current_limit_ctrl_by_vooc_write_v2(int current_ma)
 {
 	int rc = 0;
 	int tmp = 0;
@@ -567,7 +567,7 @@ int mp2650_get_pre_icl_index(void)
 	return icl_index;
 }
 
-static int oplus_vooc_get_fastchg_started(void)
+static int oplus_vooc_get_fastchg_started_v2(void)
 {
 	int fastchg_started_status = 0;
 	struct oplus_mms *vooc_topic;
@@ -727,7 +727,7 @@ static int mp2650_input_current_limit_write(struct chip_mp2650 *chip,
 	chg_vol = mp2650_get_charger_vol(chip);
 	chg_type = oplus_wired_get_chg_type();
 	if (chg_vol > AICL_POINT_SWITCH_THRE &&
-	    (0 == oplus_vooc_get_fastchg_started()) &&
+	    (0 == oplus_vooc_get_fastchg_started_v2()) &&
 	    (chg_type == OPLUS_CHG_USB_TYPE_PD || chg_type == OPLUS_CHG_USB_TYPE_QC2)) {
 		hw_aicl_point = AICL_POINT_VOL_9V;
 		sw_aicl_point = AICL_POINT_VOL_9V;
@@ -1035,7 +1035,7 @@ aicl_rerun:
 		break;
 	}
 
-	mp2650_set_vindpm_vol(hw_aicl_point);
+	mp2650_set_vindpm_vol_v2(hw_aicl_point);
 	return rc;
 }
 
@@ -1089,24 +1089,24 @@ int mp2650_set_aicl_point(struct oplus_chg_ic_dev *ic_dev, int vbatt)
 		return -ENODEV;
 	}
 
-	if (oplus_vooc_get_fastchg_started())
+	if (oplus_vooc_get_fastchg_started_v2())
 		return 0;
 
 	chg_vol = mp2650_get_charger_vol(chip);
 	if (chg_vol > AICL_POINT_SWITCH_THRE &&
 	    (chg_type == OPLUS_CHG_USB_TYPE_PD || chg_type == OPLUS_CHG_USB_TYPE_QC2)) {
 		chip->hw_aicl_point = AICL_POINT_VOL_9V;
-		mp2650_set_vindpm_vol(chip->hw_aicl_point);
+		mp2650_set_vindpm_vol_v2(chip->hw_aicl_point);
 	} else if (chip->hw_aicl_point == HW_AICL_POINT_LOW &&
 		   vbatt > SWITCH_AICL_POINT_VBAT_HIGH) {
 		chip->hw_aicl_point = HW_AICL_POINT_HIGH;
 		chip->sw_aicl_point = SW_AICL_POINT_HIGH;
-		mp2650_set_vindpm_vol(chip->hw_aicl_point);
+		mp2650_set_vindpm_vol_v2(chip->hw_aicl_point);
 	} else if (chip->hw_aicl_point == HW_AICL_POINT_HIGH &&
 		   vbatt < SWITCH_AICL_POINT_VBAT_LOW) {
 		chip->hw_aicl_point = HW_AICL_POINT_LOW;
 		chip->sw_aicl_point = SW_AICL_POINT_LOW;
-		mp2650_set_vindpm_vol(chip->hw_aicl_point);
+		mp2650_set_vindpm_vol_v2(chip->hw_aicl_point);
 	}
 
 	chg_debug("hw_aicl=%d, sw_aicl=%d, chg_vol=%d chg_type=%s\n",
@@ -1468,7 +1468,7 @@ int mp2650_get_vbus_voltage(void)
 	if (!chip)
 		return 0;
 
-	if (oplus_is_rf_ftm_mode()) {
+	if (oplus_is_rf_ftm_mode_v2()) {
 		mp2650_enable_adc_detect(true);
 		msleep(1);
 	}
@@ -1499,7 +1499,7 @@ int mp2650_get_vbus_voltage(void)
 
 	chg_debug("vbus_vol = %d \n", vbus_vol);
 
-	if (oplus_is_rf_ftm_mode())
+	if (oplus_is_rf_ftm_mode_v2())
 		mp2650_enable_adc_detect(false);
 
 	return vbus_vol;
@@ -2464,7 +2464,7 @@ int mp2650_hardware_init(void)
 
 	mp2650_set_prochot_psys_cfg();
 
-	mp2650_set_vindpm_vol(chip->hw_aicl_point);
+	mp2650_set_vindpm_vol_v2(chip->hw_aicl_point);
 
 	mp2650_set_mps_otg_current();
 
@@ -3175,7 +3175,7 @@ static int mp2650_set_icl(struct oplus_chg_ic_dev *ic_dev,
 	}
 
 	if (vooc_mode && icl_ma > 0) {
-		rc = mp2650_input_current_limit_ctrl_by_vooc_write(icl_ma);
+		rc = mp2650_input_current_limit_ctrl_by_vooc_write_v2(icl_ma);
 		return rc;
 	}
 

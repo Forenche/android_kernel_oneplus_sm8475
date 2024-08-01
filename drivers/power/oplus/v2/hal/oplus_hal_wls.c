@@ -58,7 +58,7 @@ int oplus_chg_wls_rx_smt_test(struct oplus_chg_ic_dev *rx_ic, char buf[], int le
 }
 #endif
 
-int oplus_chg_wls_rx_enable(struct oplus_chg_ic_dev *rx_ic, bool en)
+int oplus_chg_wls_rx_enable_v2(struct oplus_chg_ic_dev *rx_ic, bool en)
 {
 	int rc;
 

@@ -173,8 +173,8 @@ static inline void *oplus_chg_ic_get_priv_data(const struct oplus_chg_ic_dev *ic
 	return ic_dev->priv_data;
 }
 
-void oplus_chg_ic_list_lock(void);
-void oplus_chg_ic_list_unlock(void);
+void oplus_chg_ic_list_lock_v2(void);
+void oplus_chg_ic_list_unlock_v2(void);
 struct oplus_chg_ic_dev *oplus_chg_ic_find_by_name(const char *name);
 struct oplus_chg_ic_dev *of_get_oplus_chg_ic(struct device_node *node, const char *prop_name, int index);
 const char *of_get_oplus_chg_ic_name(struct device_node *node, const char *prop_name, int index);

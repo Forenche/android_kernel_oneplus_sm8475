@@ -13,7 +13,7 @@
 /*wls rx APIs*/
 void oplus_chg_wls_rx_dump_regs(struct oplus_chg_ic_dev *rx_ic);
 int oplus_chg_wls_rx_smt_test(struct oplus_chg_ic_dev *rx_ic);
-int oplus_chg_wls_rx_enable(struct oplus_chg_ic_dev *rx_ic, bool en);
+int oplus_chg_wls_rx_enable_v2(struct oplus_chg_ic_dev *rx_ic, bool en);
 bool oplus_chg_wls_rx_is_enable(struct oplus_chg_ic_dev *rx_ic);
 bool oplus_chg_wls_rx_is_connected(struct oplus_chg_ic_dev *rx_ic);
 int oplus_chg_wls_rx_get_vout(struct oplus_chg_ic_dev *rx_ic, int *vol_mv);

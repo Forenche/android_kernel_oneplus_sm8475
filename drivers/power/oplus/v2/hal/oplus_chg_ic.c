@@ -68,12 +68,12 @@ void oplus_chg_ic_free_minor(unsigned int minor)
 }
 #endif
 
-void oplus_chg_ic_list_lock(void)
+void oplus_chg_ic_list_lock_v2(void)
 {
 	mutex_lock(&list_lock);
 }
 
-void oplus_chg_ic_list_unlock(void)
+void oplus_chg_ic_list_unlock_v2(void)
 {
 	mutex_unlock(&list_lock);
 }
