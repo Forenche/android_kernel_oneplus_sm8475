@@ -1639,7 +1639,7 @@ static int oplus_chg_wls_rx_disable_vote_callback(struct votable *votable, void 
 	struct oplus_chg_wls *wls_dev = data;
 	int rc;
 
-	rc = oplus_chg_wls_rx_enable_v2(wls_dev->wls_rx->rx_ic, !disable);
+	rc = oplus_chg_wls_rx_enable(wls_dev->wls_rx->rx_ic, !disable);
 	if (rc < 0)
 		chg_err("can't %s wireless charge\n", disable ? "disable" : "enable");
 	else
@@ -3783,7 +3783,7 @@ struct oplus_chg_fw_head {
 	int size;
 };
 
-ssize_t oplus_chg_wls_upgrade_fw_show_v2(struct oplus_mms *mms, char *buf)
+ssize_t oplus_chg_wls_upgrade_fw_show(struct oplus_mms *mms, char *buf)
 {
 	int rc = 0;
 

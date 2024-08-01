@@ -32,10 +32,10 @@ struct exception_data {
 	struct excet_dat excep[TRACK_EXCEP_NUM_MAX];
 };
 
-int chg_exception_report_v2(void *chg_exception_data, int type_reason, int flag_reason,
+int chg_exception_report(void *chg_exception_data, int type_reason, int flag_reason,
 				void *summary, unsigned int summary_size);
 int oplus_chg_set_app_info(const char *buf);
-int oplus_chg_olc_config_set_v2(const char *buf);
-int oplus_chg_olc_config_get_v2(char *buf);
-int oplus_chg_batterylog_exception_push_v2(void);
+int oplus_chg_olc_config_set(const char *buf);
+int oplus_chg_olc_config_get(char *buf);
+int oplus_chg_batterylog_exception_push(void);
 #endif /*__OPLUS_CHG_EXCEPTION_H__*/

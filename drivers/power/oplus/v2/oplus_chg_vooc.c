@@ -459,7 +459,7 @@ static int oplus_vooc_get_bcc_temp_range(struct oplus_mms *topic,
 static int oplus_vooc_get_svooc_type(struct oplus_mms *topic,
 				     union mms_msg_data *data);
 void oplus_vooc_cancel_bcc_update_work_sync(struct oplus_chg_vooc *chip);
-bool oplus_vooc_wake_bcc_update_work_v2(struct oplus_chg_vooc *chip);
+bool oplus_vooc_wake_bcc_update_work(struct oplus_chg_vooc *chip);
 static void oplus_vooc_bcc_get_curve(struct oplus_chg_vooc *chip);
 static void oplus_vooc_bcc_get_curr_func(struct work_struct *work);
 int oplus_mcu_bcc_svooc_batt_curves(struct oplus_chg_vooc *chip,
@@ -2507,7 +2507,7 @@ static int oplus_vooc_push_break_code(struct oplus_chg_vooc *chip, int code)
 	return rc;
 }
 
-bool oplus_vooc_wake_bcc_update_work_v2(struct oplus_chg_vooc *chip)
+bool oplus_vooc_wake_bcc_update_work(struct oplus_chg_vooc *chip)
 {
 	if (!chip) {
 		chg_err(" g_vooc_chip NULL,return\n");
@@ -2748,7 +2748,7 @@ static void oplus_vooc_fastchg_work(struct work_struct *work)
 
 		if (oplus_vooc_get_bcc_support(chip) &&
 		    chip->bcc_wake_up_done == false) {
-			oplus_vooc_wake_bcc_update_work_v2(chip);
+			oplus_vooc_wake_bcc_update_work(chip);
 		}
 		temp_curr = oplus_vooc_level_to_current(chip->vooc_topic, ret_info);
 		vooc_curr = vooc_curr < temp_curr ? vooc_curr : temp_curr;

@@ -71,7 +71,7 @@ struct op10_chip {
 	char *fw_path;
 };
 
-extern int charger_abnormal_log_v2;
+extern int charger_abnormal_log;
 
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 10, 0))
 int __attribute__((weak))
@@ -625,7 +625,7 @@ static int op10_fw_update(struct op10_chip *chip, const u8 *fw_buf, u32 fw_size)
 	return 0;
 
 update_fw_err:
-	charger_abnormal_log_v2 = CRITICAL_LOG_VOOC_FW_UPDATE_ERR;
+	charger_abnormal_log = CRITICAL_LOG_VOOC_FW_UPDATE_ERR;
 	chg_err("fail\n");
 	return 1;
 }
@@ -678,7 +678,7 @@ static int op10_get_fw_verion_from_ic(struct op10_chip *chip)
 	int rc = 0;
 	int update_result = 0;
 
-	if (oplus_is_power_off_charging() || oplus_is_charger_reboot_v2()) {
+	if (oplus_is_power_off_charging() || oplus_is_charger_reboot()) {
 		chip->upgrading = true;
 		update_result = op10_fw_update(chip, chip->firmware_data,
 					       chip->fw_data_count);
@@ -722,7 +722,7 @@ static int __op10_fw_check_then_recover(struct op10_chip *chip)
 	int try_count = 5;
 	int ret = 0;
 
-	if (oplus_is_rf_ftm_mode_v2()) {
+	if (oplus_is_rf_ftm_mode()) {
 		op10_set_reset_sleep(chip);
 		return 0;
 	}
@@ -736,7 +736,7 @@ static int __op10_fw_check_then_recover(struct op10_chip *chip)
 		chg_debug("begin\n");
 	}
 
-	if (oplus_is_power_off_charging() || oplus_is_charger_reboot_v2()) {
+	if (oplus_is_power_off_charging() || oplus_is_charger_reboot()) {
 		chip->upgrading = false;
 		op10_set_clock_sleep(chip);
 		op10_set_reset_sleep(chip);

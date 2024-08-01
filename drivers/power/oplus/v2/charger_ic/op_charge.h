@@ -127,7 +127,7 @@ struct usb_temp temperature_list2[TEMPERATURE_LIST_LENGTH];	/* length = 1.5s / 5
 	(pull_up_resistance / (pull_up_voltage - vadc) * vadc)
 
 /* ntc1 100Kohm when 25c */
-struct ntc_table ntc_table_100K_v2[] = {
+struct ntc_table ntc_table_100K[] = {
 	/* {ohm, 0.1*celsius} */
 	{4251000, -400},	{3962000, -390},	{3695000, -380},	{3447000, -370},	{3218000, -360},
 	{3005000, -350},	{2807000, -340},	{2624000, -330},	{2454000, -320},	{2296000, -310},

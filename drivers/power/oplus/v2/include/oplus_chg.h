@@ -165,7 +165,7 @@ static inline struct timespec current_kernel_time(void)
 #define PD_APDO_MIN_VOLT(pdo)			(((pdo) >> 8) & 0xFF)
 #define PD_APDO_MAX_CURR(pdo)			((pdo) & 0x7F)
 
-int oplus_is_rf_ftm_mode_v2(void);
+int oplus_is_rf_ftm_mode(void);
 
 typedef enum {
 	CHARGER_SUBTYPE_DEFAULT = 0,
@@ -329,7 +329,7 @@ enum fastchg_protocol_type {
 #define USB_DONOT_USE		BIT(31)
 
 bool oplus_is_power_off_charging(void);
-bool oplus_is_charger_reboot_v2(void);
+bool oplus_is_charger_reboot(void);
 struct timespec oplus_current_kernel_time(void);
 bool oplus_is_ptcrb_version(void);
 

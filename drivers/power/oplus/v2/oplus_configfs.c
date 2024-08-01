@@ -1658,7 +1658,7 @@ static DEVICE_ATTR_RW(status_keep);
 
 #ifdef WLS_QI_DEBUG
 ssize_t __attribute__((weak))
-oplus_chg_wls_upgrade_fw_show_v2(struct oplus_mms *mms, char *buf)
+oplus_chg_wls_upgrade_fw_show(struct oplus_mms *mms, char *buf)
 {
 	return 0;
 }
@@ -1678,7 +1678,7 @@ static ssize_t upgrade_firmware_show(struct device *dev, struct device_attribute
 		return -EINVAL;
 	}
 
-	return oplus_chg_wls_upgrade_fw_show_v2(chip->wls_topic, buf);
+	return oplus_chg_wls_upgrade_fw_show(chip->wls_topic, buf);
 }
 
 static ssize_t upgrade_firmware_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
@@ -1756,7 +1756,7 @@ static ssize_t chg_olc_config_store(struct device *dev, struct device_attribute 
 		return -EINVAL;
 	}
 
-	oplus_chg_olc_config_set_v2(buf);
+	oplus_chg_olc_config_set(buf);
 	return count;
 }
 
@@ -1770,7 +1770,7 @@ static ssize_t chg_olc_config_show(struct device *dev, struct device_attribute *
 		return -EINVAL;
 	}
 
-	len = oplus_chg_olc_config_get_v2(buf);
+	len = oplus_chg_olc_config_get(buf);
 	return len;
 }
 static DEVICE_ATTR_RW(chg_olc_config);
@@ -1832,7 +1832,7 @@ static ssize_t battlog_push_config_store(struct device *dev,
 	}
 
 	if (!!val) {
-		rc = oplus_chg_batterylog_exception_push_v2();
+		rc = oplus_chg_batterylog_exception_push();
 		if (rc < 0)
 			chg_err("push batterylog failed, rc=%d\n", rc);
 		else

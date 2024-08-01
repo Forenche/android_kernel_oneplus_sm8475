@@ -149,7 +149,7 @@ static __inline__ void bq27541_i2c_err_clr(struct chip_bq27541 *chip)
 
 #ifndef CONFIG_OPLUS_CHARGER_MTK
 #if IS_ENABLED(CONFIG_OPLUS_ADSP_CHARGER)
-void __attribute__((weak)) oplus_vooc_get_fastchg_started_v2_pfunc(int (*pfunc)(void))
+void __attribute__((weak)) oplus_vooc_get_fastchg_started_pfunc(int (*pfunc)(void))
 {
 	return;
 }
@@ -167,7 +167,7 @@ void __attribute__((weak)) oplus_set_fg_device_type(int device_type)
 	return;
 }
 #else /*IS_ENABLED(CONFIG_OPLUS_ADSP_CHARGER)*/
-void __attribute__((weak)) oplus_vooc_get_fastchg_started_v2_pfunc(int (*pfunc)(void));
+void __attribute__((weak)) oplus_vooc_get_fastchg_started_pfunc(int (*pfunc)(void));
 void __attribute__((weak)) oplus_vooc_get_fastchg_ing_pfunc(int (*pfunc)(void));
 int __attribute__((weak)) oplus_get_fg_device_type(void);
 void __attribute__((weak)) oplus_set_fg_device_type(int device_type);
@@ -195,7 +195,7 @@ void __attribute__((weak)) oplus_set_fg_err_flag(struct i2c_adapter *adap, bool 
   *
   *********************************************************/
 
-int oplus_vooc_get_fastchg_started_v2(void)
+int oplus_vooc_get_fastchg_started(void)
 {
 	int fastchg_started_status = 0;
 	struct oplus_mms *vooc_topic;
@@ -222,7 +222,7 @@ int bq27541_read_i2c(struct chip_bq27541 *chip, int cmd, int *returnData)
 		pr_err(" gauge_ic->client NULL, return\n");
 		return 0;
 	}
-	if (oplus_is_rf_ftm_mode_v2())
+	if (oplus_is_rf_ftm_mode())
 		return 0;
 	if (cmd == BQ27541_BQ27411_CMD_INVALID)
 		return 0;
@@ -285,7 +285,7 @@ int bq27541_i2c_txsubcmd(struct chip_bq27541 *chip, int cmd, int writeData)
 		pr_err(" gauge_ic->client NULL, return\n");
 		return 0;
 	}
-	if (oplus_is_rf_ftm_mode_v2())
+	if (oplus_is_rf_ftm_mode())
 		return 0;
 	if (cmd == BQ27541_BQ27411_CMD_INVALID)
 		return 0;
@@ -323,7 +323,7 @@ static int bq27541_write_i2c_block(struct chip_bq27541 *chip, u8 cmd, u8 length,
 		pr_err(" gauge_ic->client NULL, return\n");
 		return 0;
 	}
-	if (oplus_is_rf_ftm_mode_v2())
+	if (oplus_is_rf_ftm_mode())
 		return 0;
 	if (cmd == BQ27541_BQ27411_CMD_INVALID)
 		return 0;
@@ -362,7 +362,7 @@ static int bq27541_read_i2c_block(struct chip_bq27541 *chip, u8 cmd, u8 length, 
 		pr_err(" gauge_ic->client NULL,return\n");
 		return 0;
 	}
-	if (oplus_is_rf_ftm_mode_v2())
+	if (oplus_is_rf_ftm_mode())
 		return 0;
 	if (cmd == BQ27541_BQ27411_CMD_INVALID)
 		return 0;
@@ -402,7 +402,7 @@ static int bq27541_read_i2c_onebyte(struct chip_bq27541 *chip, u8 cmd, u8 *retur
 		pr_err(" gauge_ic->client NULL, return\n");
 		return 0;
 	}
-	if (oplus_is_rf_ftm_mode_v2())
+	if (oplus_is_rf_ftm_mode())
 		return 0;
 	if (cmd == BQ27541_BQ27411_CMD_INVALID)
 		return 0;
@@ -443,7 +443,7 @@ static int bq27541_i2c_txsubcmd_onebyte(struct chip_bq27541 *chip, u8 cmd, u8 wr
 		pr_err(" gauge_ic->client NULL, return\n");
 		return 0;
 	}
-	if (oplus_is_rf_ftm_mode_v2())
+	if (oplus_is_rf_ftm_mode())
 		return 0;
 	if (cmd == BQ27541_BQ27411_CMD_INVALID)
 		return 0;
@@ -2805,7 +2805,7 @@ static bool bq27541_get_battery_hmac(struct chip_bq27541 *chip)
 		return true;
 	}
 
-	if (chip->batt_bq28z610  && !oplus_is_rf_ftm_mode_v2()) {
+	if (chip->batt_bq28z610  && !oplus_is_rf_ftm_mode()) {
 		/* 		return bq27541_is_authenticate_OK(gauge_ic); */
 		get_smem_batt_info(&chip->auth_data, 1);
 		if (init_gauge_auth(chip, &chip->auth_data, chip->authenticate_data))
@@ -3817,7 +3817,7 @@ static int bq27411_write_block_data_cmd(struct chip_bq27541 *chip, int block_id,
 	u8 old_value = 0, old_csum = 0, new_csum = 0;
 	/*u8 new_csum_test = 0, csum_temp = 0;*/
 
-	if (oplus_is_rf_ftm_mode_v2())
+	if (oplus_is_rf_ftm_mode())
 		return 0;
 	usleep_range(1000, 1000);
 	bq27541_i2c_txsubcmd(chip, BQ27411_DATA_CLASS_ACCESS, block_id);
@@ -3856,7 +3856,7 @@ static int bq27411_read_block_data_cmd(struct chip_bq27541 *chip, int block_id,
 {
 	u8 value = 0;
 
-	if (oplus_is_rf_ftm_mode_v2())
+	if (oplus_is_rf_ftm_mode())
 		return 0;
 	usleep_range(1000, 1000);
 	bq27541_i2c_txsubcmd(chip, BQ27411_DATA_CLASS_ACCESS, block_id);
@@ -4458,7 +4458,7 @@ static int bq27411_modify_soc_smooth_parameter(struct chip_bq27541 *chip, bool i
 		return GAUGE_OK;
 	} else {
 		if (chip->batt_bq28z610 && is_powerup &&
-			!chip->i2c_err && oplus_is_rf_ftm_mode_v2() == false) {
+			!chip->i2c_err && oplus_is_rf_ftm_mode() == false) {
 			chg_info("batt_bq28z610 powerup\n");
 			/*power up disable sleep mode*/
 			bq28z610_set_sleep_mode(chip, false);
@@ -6988,7 +6988,7 @@ rerun:
 	chg_info("register %s\n", fg_ic->dev->of_node->name);
 
 #ifndef CONFIG_OPLUS_CHARGER_MTK
-	oplus_vooc_get_fastchg_started_v2_pfunc(&oplus_vooc_get_fastchg_started_v2);
+	oplus_vooc_get_fastchg_started_pfunc(&oplus_vooc_get_fastchg_started);
 	oplus_vooc_get_fastchg_ing_pfunc(&oplus_vooc_get_fastchg_ing);
 #endif
 

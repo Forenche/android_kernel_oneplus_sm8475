@@ -25,9 +25,9 @@ module_param(oplus_log_level, int, 0644);
 MODULE_PARM_DESC(oplus_log_level, "debug log level");
 EXPORT_SYMBOL(oplus_log_level);
 
-int charger_abnormal_log_v2 = 0;
+int charger_abnormal_log = 0;
 
-int oplus_is_rf_ftm_mode_v2(void)
+int oplus_is_rf_ftm_mode(void)
 {
 #ifndef CONFIG_DISABLE_OPLUS_FUNCTION
 	int boot_mode = get_boot_mode();
@@ -116,7 +116,7 @@ bool oplus_is_power_off_charging_v2(void)
 #endif /*CONFIG_DISABLE_OPLUS_FUNCTION*/
 }
 
-bool oplus_is_charger_reboot_v2(void)
+bool oplus_is_charger_reboot(void)
 {
 #ifndef CONFIG_DISABLE_OPLUS_FUNCTION
 #ifdef CONFIG_OPLUS_CHARGER_MTK
