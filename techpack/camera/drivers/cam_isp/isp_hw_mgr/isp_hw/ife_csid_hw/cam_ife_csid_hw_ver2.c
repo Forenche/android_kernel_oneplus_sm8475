@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Copyright (c) 2020-2021, The Linux Foundation. All rights reserved.
- * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #include <linux/iopoll.h>
@@ -980,7 +980,7 @@ static void cam_clear_cphy_count(u64 delay_ms)
 	}
 }
 
-static void cam_handle_cphy_error(void)
+static void cam_handle_cphy_error()
 {
 	if (enable_cphy_crash) {
 		if (!cphy_crashed) {
@@ -1938,6 +1938,8 @@ static int cam_ife_csid_ver2_rdi_bottom_half(
 		if (path_cfg->sec_evt_config.en_secondary_evt &&
 			(path_cfg->sec_evt_config.evt_type & CAM_IFE_CSID_EVT_SOF)) {
 			evt_info.is_secondary_evt = true;
+			csid_hw->event_cb(csid_hw->token,
+				CAM_ISP_HW_EVENT_SOF, (void *)&evt_info);
 		}
 		csid_hw->event_cb(csid_hw->token, CAM_ISP_HW_EVENT_SOF,	(void *)&evt_info);
 	}
@@ -1952,6 +1954,7 @@ static int cam_ife_csid_ver2_rdi_bottom_half(
 		}
 		csid_hw->event_cb(csid_hw->token, CAM_ISP_HW_EVENT_EPOCH, (void *)&evt_info);
 	}
+
 #ifdef OPLUS_FEATURE_CAMERA_COMMON//lanhe todo
 	if (csid_hw->flags.use_rdi_sof &&
 		(irq_status_rdi & IFE_CSID_VER2_PATH_INFO_INPUT_SOF))
