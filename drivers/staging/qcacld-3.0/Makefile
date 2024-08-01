@@ -17,7 +17,7 @@ LOCAL_DEV_NAME := $(patsubst .%,%,\
 	$(lastword $(strip $(subst /, ,$(M)))))
 
 # WLAN_ROOT must contain an absolute path (i.e. not a relative path)
-KBUILD_OPTIONS := WLAN_ROOT=$(KERNEL_SRC)/$(M)
+KBUILD_OPTIONS := WLAN_ROOT=$(srctree)/$(src)
 
 # MODNAME should be qca_cld3_wlan for helium based platform
 ifeq (qca_cld3, $(WLAN_CHIPSET))
