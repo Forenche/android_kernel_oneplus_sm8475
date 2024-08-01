@@ -1442,6 +1442,63 @@ static int msm_cvp_set_sysprop(struct msm_cvp_inst *inst,
 	return rc;
 }
 
+static int cvp_drain_fence_cmd_queue_partial(struct msm_cvp_inst *inst)
+{
+	unsigned long wait_time;
+	struct cvp_fence_queue *q;
+	struct cvp_fence_command *f;
+	int rc = 0;
+	int count = 0, max_count = 0;
+
+	q = &inst->fence_cmd_queue;
+
+	mutex_lock(&q->lock);
+
+	list_for_each_entry(f, &q->sched_list, list) {
+		if (f->mode == OP_FLUSH)
+			continue;
+		++count;
+	}
+
+	list_for_each_entry(f, &q->wait_list, list) {
+		if (f->mode == OP_FLUSH)
+			continue;
+		++count;
+	}
+
+	mutex_unlock(&q->lock);
+	wait_time = count * CVP_MAX_WAIT_TIME * 1000;
+
+	dprintk(CVP_SYNX, "%s: wait %d us for %d fence command\n",
+			__func__, wait_time, count);
+
+	count = 0;
+	max_count = wait_time / 100;
+
+retry:
+	mutex_lock(&q->lock);
+	f = list_first_entry(&q->sched_list, struct cvp_fence_command, list);
+
+	/* Wait for all normal frames to finish before return */
+	if ((f && f->mode == OP_FLUSH) ||
+		(list_empty(&q->sched_list) && list_empty(&q->wait_list))) {
+		mutex_unlock(&q->lock);
+		return rc;
+	}
+
+	mutex_unlock(&q->lock);
+	usleep_range(100, 200);
+	++count;
+	if (count < max_count) {
+		goto retry;
+	} else {
+		rc = -ETIMEDOUT;
+		dprintk(CVP_ERR, "%s: timed out!\n", __func__);
+	}
+
+	return rc;
+}
+
 static int cvp_drain_fence_sched_list(struct msm_cvp_inst *inst)
 {
 	unsigned long wait_time;
