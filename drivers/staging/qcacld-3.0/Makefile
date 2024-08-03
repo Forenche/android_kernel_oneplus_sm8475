@@ -35,7 +35,8 @@ KBUILD_OPTIONS += \
     DYNAMIC_SINGLE_CHIP=$(LOCAL_DEV_NAME) \
     MODNAME=$(WLAN_CHIPSET)_$(LOCAL_DEV_NAME) \
     DEVNAME=$(LOCAL_DEV_NAME) \
-    WLAN_CTRL_NAME=wlan
+    WLAN_CTRL_NAME=wlan \
+    WLAN_COMMON_ROOT=../qca-wifi-host-cmn
 
 endif
 
