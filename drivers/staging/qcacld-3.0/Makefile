@@ -13,8 +13,7 @@ M ?= $(shell pwd)
 
 ifeq ($(WLAN_ROOT),)
 WLAN_CHIPSET := qca_cld3
-LOCAL_DEV_NAME := $(patsubst .%,%,\
-	$(lastword $(strip $(subst /, ,$(M)))))
+LOCAL_DEV_NAME := qca6490
 
 # WLAN_ROOT must contain an absolute path (i.e. not a relative path)
 KBUILD_OPTIONS := WLAN_ROOT=$(srctree)/$(src)
