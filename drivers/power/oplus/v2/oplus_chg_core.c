@@ -25,7 +25,7 @@ module_param(oplus_log_level, int, 0644);
 MODULE_PARM_DESC(oplus_log_level, "debug log level");
 EXPORT_SYMBOL(oplus_log_level);
 
-int charger_abnormal_log_v2 = 0;
+int charger_abnormal_log_2 = 0;
 
 int oplus_is_rf_ftm_mode_v2(void)
 {
