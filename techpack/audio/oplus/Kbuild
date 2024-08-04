@@ -1,4 +1,4 @@
-obj-y += asoc/ asoc/codecs/tfa98xx-v6/
+obj-y += asoc/
 
 #ifdef OPLUS_ARCH_EXTENDS
 obj-y += asoc/codecs/sia9175/
